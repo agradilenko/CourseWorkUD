@@ -1,5 +1,5 @@
 module.exports =(sequalize, Sequalize) => {
-    const Discounts = sequalize.define("Discounts", {
+    const Discount = sequalize.define("Discounts", {
             discountId: {
                 type: Sequalize.INTEGER,
                 primaryKey: true,
@@ -23,5 +23,5 @@ module.exports =(sequalize, Sequalize) => {
         }
     );
 
-    return Discounts;
+    return Discount;
 };
