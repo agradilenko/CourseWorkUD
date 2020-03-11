@@ -1,20 +1,20 @@
 module.exports =(sequalize, Sequalize) => {
-    const Delivery = sequalize.define("Delivery", {
-            deliveryId: {
+    const Manufacturer = sequalize.define("Manufacturer", {
+            manufacturerId: {
                 type: Sequalize.INTEGER,
                 primaryKey: true,
                 autoIncrement: true
             },
-            deliveryName: {
+            manufacturerName: {
                 type: Sequalize.STRING(100),
                 allowNull: false,
                 unique: true
             },
-            phoneNumber: {
+            manufacturerCountry: {
                 type: Sequalize.STRING(100),
                 allowNull: false,
             },
-            email: {
+            headquarters: {
                 type: Sequalize.STRING(100),
                 allowNull: false,
             },
@@ -23,5 +23,5 @@ module.exports =(sequalize, Sequalize) => {
         }
     );
 
-    return Delivery;
+    return Manufacturer;
 };
