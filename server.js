@@ -35,6 +35,7 @@ require("./app/routes/discount.routes")(app);
 require("./app/routes/delivery.routes")(app);
 require("./app/routes/manufacturer.routes")(app);
 require("./app/routes/order.routes")(app);
+require("./app/routes/ordered.routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8888;
