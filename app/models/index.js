@@ -22,5 +22,6 @@ db.types = require("./type.model.js")(sequelize, Sequelize);
 db.products = require("./product.model.js")(sequelize, Sequelize);
 db.clients = require("./client.model.js")(sequelize, Sequelize);
 db.discounts = require("./discount.model.js")(sequelize, Sequelize);
+db.delivery = require("./delivery.model.js")(sequelize, Sequelize);
 
 module.exports = db;
