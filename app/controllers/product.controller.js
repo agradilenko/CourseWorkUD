@@ -5,7 +5,7 @@ const Op = db.Sequelize.Op;
 // Create and Save a new Product
 exports.create = (req, res) => {
   // Validate request
-  if (!req.body.productId) {
+  if (!req.body.productName) {
     res.status(400).send({
       message: "Content can not be empty!"
     });
@@ -27,7 +27,7 @@ exports.create = (req, res) => {
   // Save Product in the database
   Product.create(product)
       .then(data => {
-        res.send(data);
+        res.redirect('/api/products');
       })
       .catch(err => {
         res.status(500).send({
@@ -38,29 +38,31 @@ exports.create = (req, res) => {
 };
 
 // Retrieve all Products from the database.
-exports.findAll = (req, res) => {
-  const productName = req.query.productName;
-  var condition = productName ? { productName: { [Op.iLike]: `%${productName}%` } } : null;
+// exports.findAll = (req, res) => {
+//   const productName = req.query.productName;
+//   var condition = productName ? { productName: { [Op.iLike]: `%${productName}%` } } : null;
+//
+//   Product.findAll({ where: condition })
+//       .then(products => {
+//         res.render('products', {
+//             products
+//         });
+//       })
+//       .catch(err => {
+//         res.status(500).send({
+//           message:
+//               err.message || "Some error occurred while retrieving products."
+//         });
+//       });
+// };
 
-  Product.findAll({ where: condition })
-      .then(data => {
-        res.send(data);
-      })
-      .catch(err => {
-        res.status(500).send({
-          message:
-              err.message || "Some error occurred while retrieving products."
-        });
-      });
-};
-
-// Find a single Product with an id
+// Find Product with an id
 exports.findOne = (req, res) => {
   const id = req.params.productId;
 
   Product.findByPk(id)
-      .then(data => {
-        res.send(data);
+      .then(products => {
+        res.render('data', {products});
       })
       .catch(err => {
         res.status(500).send({
@@ -149,3 +151,4 @@ exports.findAllAvailable = (req, res) => {
         });
       });
 };
+

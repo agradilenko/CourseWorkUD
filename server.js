@@ -2,6 +2,7 @@ const express = require("express");
 const exphbs = require('express-handlebars');
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const path = require('path');
 
 const app = express();
 
@@ -12,8 +13,8 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // Handlebars
-app.engine('handlebars', exphbs({defaultLayout: "main"}));
-app.set("view engine", "handlebars");
+app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
+app.set('view engine', 'handlebars');
 // parse requests of content-type - application/json
 app.use(bodyParser.json());
 
@@ -28,9 +29,8 @@ db.sequelize.sync();
 // });
 
 // simple route
-app.get("/", (req, res) => {
-  res.json({ message: "Welcome to artem.gradilenko application." });
-});
+// Index route
+app.get('/', (req, res) => res.render('index', { layout: 'landing' }));
 
 require("./app/routes/product.routes")(app);
 require("./app/routes/type.routes")(app);
@@ -40,6 +40,9 @@ require("./app/routes/delivery.routes")(app);
 require("./app/routes/manufacturer.routes")(app);
 require("./app/routes/order.routes")(app);
 require("./app/routes/ordered.routes")(app);
+
+// Set static folder
+app.use(express.static(path.join(__dirname, 'public')));
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8888;

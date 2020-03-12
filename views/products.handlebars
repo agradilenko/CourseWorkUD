@@ -1,0 +1,37 @@
+<section id="gigs" class="container">
+    <nav>
+        <ul class="sub-menu">
+            <li>
+                <a href="/api/products/add">Add Product</a>
+            </li>
+            <li>
+                <a href="/">Update Product</a>
+            </li>
+            <li>
+                <a href="/">Find Product</a>
+            </li>
+            <li>
+                <a href="/api/products/delete">Delete Product</a>
+            </li>
+        </ul>
+    </nav>
+    <h1>All Products</h1>
+
+    {{#each products}}
+        <div class="gig">
+            <h3>{{productId}}</h3>
+            <p>{{productName}}</p>
+            <ul>
+                <li>typeId: {{typeId}}</li>
+                <li>manufacturerId: {{manufacturerId}}</li>
+                <li>availability: {{availability}}</li>
+                <li>purchaseCost: {{purchaseCost}}</li>
+                <li>saleCost: {{saleCost}}</li>
+                <li>quantityOnStock: {{quantityOnStock}}</li>
+            </ul>
+        </div>
+    {{else}}
+        <p>No products available</p>
+    {{/each}}
+
+</section>
