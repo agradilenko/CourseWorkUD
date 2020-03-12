@@ -1,15 +1,19 @@
 const express = require("express");
+const exphbs = require('express-handlebars');
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
 const app = express();
 
-var corsOptions = {
+const corsOptions = {
   origin: "http://localhost:5432"
 };
 
 app.use(cors(corsOptions));
 
+// Handlebars
+app.engine('handlebars', exphbs({defaultLayout: "main"}));
+app.set("view engine", "handlebars");
 // parse requests of content-type - application/json
 app.use(bodyParser.json());
 
