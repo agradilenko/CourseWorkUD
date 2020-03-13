@@ -1,17 +1,18 @@
+
 <section id="add" class="container">
     <div class="form-wrap">
-        <h1>Delete A Product</h1>
+        <h1>Find A Product</h1>
         {{#each errors}}
             <div class="error">
                 <p>{{text}}</p>
             </div>
         {{/each}}
-        <form action="search/" method="GET">
+        <form action="/search:productId" method="GET">
             <div class="input-group">
                 <label for="productId">Product id</label>
-                <input type="number" name="productId" id="productId" class="input-box" placeholder="eg. 1, 2, 3, 4"  value={{productId}}>
+                <input type="number" name="productId" id="productIdSearch" class="input-box" placeholder="eg. 1, 2, 3, 4">
             </div>
-            <input type="submit" value="Delete Product" class="btn btn-reverse">
+            <input type="submit" value="Find a Product" class="btn btn-reverse">
         </form>
     </div>
 </section>

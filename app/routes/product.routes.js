@@ -1,3 +1,4 @@
+
 module.exports = app => {
   const products = require("../controllers/product.controller.js");
   const router = require("express").Router();
@@ -23,18 +24,20 @@ module.exports = app => {
   //Display delete Product form
   router.get('/delete', (req, res) => res.render('deleteProduct'));
 
+  //Display delete Product form
+  router.get('/find', (req, res) => res.render('findProduct'));
+
   // Retrieve all available Products
   router.get("/availability", products.findAllAvailable);
 
   // Retrieve a single Product with id
-  router.get("/:productId", products.findOne);
+  // router.get("/:productId", products.findOne);
 
-  // Search for gigs
-  router.get('/search', (req, res) => {
-    let { productId } = req.query;
-
+  // Search for
+  router.get('/search:productId', (req, res) => {
+    let  productId  = req.query.productId;
     Product.findAll({ where: { productId: { [Op.like]: '%' + productId + '%' } } })
-        .then(gigs => res.render('products', { products }))
+        .then(products => res.render('products', { products }))
         .catch(err => console.log(err));
   });
 

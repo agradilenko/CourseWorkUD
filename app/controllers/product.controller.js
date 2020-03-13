@@ -56,20 +56,20 @@ exports.create = (req, res) => {
 //       });
 // };
 
-// Find Product with an id
-exports.findOne = (req, res) => {
-  const id = req.params.productId;
-
-  Product.findByPk(id)
-      .then(products => {
-        res.render('data', {products});
-      })
-      .catch(err => {
-        res.status(500).send({
-          message: "Error retrieving Product with id=" + id
-        });
-      });
-};
+// // Find Product with an id
+// exports.findOne = (req, res) => {
+//   const id = req.params.productId;
+//
+//   Product.findByPk(id)
+//       .then(products => {
+//         res.render('data', {products});
+//       })
+//       .catch(err => {
+//         res.status(500).send({
+//           message: "Error retrieving Product with id=" + id
+//         });
+//       });
+// };
 
 // Update a Product by the id in the request
 exports.update = (req, res) => {
