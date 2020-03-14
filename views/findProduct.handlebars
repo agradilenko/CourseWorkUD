@@ -1,4 +1,4 @@
-
+<script >alert("script work")</script>
 <section id="add" class="container">
     <div class="form-wrap">
         <h1>Find A Product</h1>
@@ -7,7 +7,7 @@
                 <p>{{text}}</p>
             </div>
         {{/each}}
-        <form action="/search:productId" method="GET">
+        <form action="search" method="GET">
             <div class="input-group">
                 <label for="productId">Product id</label>
                 <input type="number" name="productId" id="productIdSearch" class="input-box" placeholder="eg. 1, 2, 3, 4">

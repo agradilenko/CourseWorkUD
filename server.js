@@ -7,10 +7,17 @@ const path = require('path');
 const app = express();
 
 const corsOptions = {
-  origin: "http://localhost:5432"
+  origin: "http://localhost:8888"
 };
 
 app.use(cors(corsOptions));
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Methods", "DELETE, PUT, UPDATE, HEAD, OPTIONS, GET, POST");
+  next();
+});
 
 // Handlebars
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));

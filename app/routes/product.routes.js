@@ -1,4 +1,5 @@
 
+
 module.exports = app => {
   const products = require("../controllers/product.controller.js");
   const router = require("express").Router();
@@ -34,7 +35,7 @@ module.exports = app => {
   // router.get("/:productId", products.findOne);
 
   // Search for
-  router.get('/search:productId', (req, res) => {
+  router.get('/search?productId', (req, res) => {
     let  productId  = req.query.productId;
     Product.findAll({ where: { productId: { [Op.like]: '%' + productId + '%' } } })
         .then(products => res.render('products', { products }))
@@ -45,7 +46,7 @@ module.exports = app => {
   router.put("/:productId", products.update);
 
   // Delete a Product with id
-  router.delete("/:productId", products.delete);
+  router.delete("/", products.delete);
 
   // Delete all Products
   router.delete("/", products.deleteAll);

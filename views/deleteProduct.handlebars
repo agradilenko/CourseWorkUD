@@ -1,3 +1,19 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#delete-btn").on("click", function () {
+            const productId = $('input[name="productId"]').val();
+            $.ajax({
+                type: "DELETE",
+                url: "/api/products"+productId,
+                success: function () {
+                    alert(productId);
+                }
+            });
+            alert(productId);
+        });
+    });
+</script>
 <section id="add" class="container">
     <div class="form-wrap">
         <h1>Delete A Product</h1>
@@ -6,12 +22,12 @@
                 <p>{{text}}</p>
             </div>
         {{/each}}
-        <form action="delete/" method="DELETE">
+        <form>
             <div class="input-group">
                 <label for="productId">Product id</label>
                 <input type="number" name="productId" id="productId" class="input-box" placeholder="eg. 1, 2, 3, 4"  value={{productId}}>
             </div>
-            <input type="submit" value="Delete Product" class="btn btn-reverse">
+            <input type="submit" value="Delete Product" id="delete-btn" class="btn btn-reverse">
         </form>
     </div>
 </section>
