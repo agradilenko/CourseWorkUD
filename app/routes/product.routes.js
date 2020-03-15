@@ -46,7 +46,7 @@ module.exports = app => {
   router.put("/:productId", products.update);
 
   // Delete a Product with id
-  router.delete("/", products.delete);
+  router.delete("/:productId", products.delete);
 
   // Delete all Products
   router.delete("/", products.deleteAll);

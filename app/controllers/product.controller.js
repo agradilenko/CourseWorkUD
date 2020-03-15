@@ -98,7 +98,7 @@ exports.update = (req, res) => {
 
 // Delete a Product with the specified id in the request
 exports.delete = (req, res) => {
-    const productId = req.query.productId;
+    const productId = req.params.productId;
 
     Product.destroy({
         where: { productId: productId }

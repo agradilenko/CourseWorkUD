@@ -4,8 +4,8 @@
         $("#delete-btn").on("click", function () {
             const productId = $('input[name="productId"]').val();
             $.ajax({
-                type: "DELETE",
-                url: "/api/products"+productId,
+                method: "DELETE",
+                url: "/api/products/"+productId,
                 success: function () {
                     alert(productId);
                 }
@@ -27,7 +27,7 @@
                 <label for="productId">Product id</label>
                 <input type="number" name="productId" id="productId" class="input-box" placeholder="eg. 1, 2, 3, 4"  value={{productId}}>
             </div>
-            <input type="submit" value="Delete Product" id="delete-btn" class="btn btn-reverse">
         </form>
+        <button id="delete-btn" class="btn btn-reverse">Delete Product</button>
     </div>
 </section>
