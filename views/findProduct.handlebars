@@ -1,4 +1,16 @@
-<script >alert("script work")</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#find-btn").on("click", function () {
+            const productName = $('input[name="productName"]').val();
+            $.ajax({
+                method: "GET",
+                url: "/api/products/"+productName,
+            });
+            alert(productName);
+        });
+    });
+</script>
 <section id="add" class="container">
     <div class="form-wrap">
         <h1>Find A Product</h1>
@@ -9,10 +21,10 @@
         {{/each}}
         <form action="search" method="GET">
             <div class="input-group">
-                <label for="productId">Product id</label>
-                <input type="number" name="productId" id="productIdSearch" class="input-box" placeholder="eg. 1, 2, 3, 4">
+                <label for="productNameSearch">Product Name</label>
+                <input type="text" name="productName" id="productNameSearch" class="input-box" placeholder="eg. ASus, Msi...">
             </div>
-            <input type="submit" value="Find a Product" class="btn btn-reverse">
         </form>
+        <button id="find-btn" class="btn btn-reverse">Find Product</button>
     </div>
 </section>

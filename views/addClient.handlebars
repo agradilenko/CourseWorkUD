@@ -1,0 +1,46 @@
+<section id="add" class="container">
+    <div class="form-wrap">
+        <h1>Add A Product</h1>
+        {{#each errors}}
+            <div class="error">
+                <p>{{text}}</p>
+            </div>
+        {{/each}}
+        <form action="add/" method="POST">
+            <div class="input-group">
+                <label for="clientId">Product type id</label>
+                <input type="number" name="clientId" id="clientId" class="input-box" placeholder="eg. 1, 2, 3, 4"  value={{clientId}}>
+            </div>
+            <div class="input-group">
+                <label for="fullName">Product Name</label>
+                <input type="text" name="fullName" id="fullName" class="input-box" placeholder="eg. V. V. Putin "
+                       maxlength="100" value={{fullName}}>
+            </div>
+            <div class="input-group">
+                <label for="fullName">Product Name</label>
+                <input type="text" name="fullName" id="fullName" class="input-box" placeholder="eg. V. V. Putin "
+                       maxlength="100" value={{fullName}}>
+            <div class="input-group">
+                <label for="city">City</label>
+                <input type="text" name="city" id="city" class="input-box" placeholder="eg. Moscow, Kazan"
+                       maxlength="100" value={{city}}>
+            </div>
+                <div class="input-group">
+                    <label for="address">address</label>
+                    <input type="text" name="address" id="address" class="input-box" placeholder="eg. Prospekt Lenina 72"
+                           maxlength="100" value={{address}}>
+                </div>
+                <div class="input-group">
+                    <label for="phoneNumber">phoneNumber</label>
+                    <input type="text" name="phoneNumber" id="phoneNumber" class="input-box" placeholder="8xxxxxxxxxx"
+                           maxlength="11" value={{phoneNumber}}>
+                </div>
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <input type="text" name="email" id="email" class="input-box" placeholder="a@gmail.com"
+                           maxlength="100" value={{email}}>
+                </div>
+            <input type="submit" value="Add Client" class="btn btn-reverse">
+        </form>
+    </div>
+</section>

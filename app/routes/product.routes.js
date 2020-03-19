@@ -25,22 +25,27 @@ module.exports = app => {
   //Display delete Product form
   router.get('/delete', (req, res) => res.render('deleteProduct'));
 
-  //Display delete Product form
+  //Display find Product form
   router.get('/find', (req, res) => res.render('findProduct'));
 
-  // Retrieve all available Products
-  router.get("/availability", products.findAllAvailable);
+  //Display update Product form
+  router.get('/update', (req, res) => res.render('updateProduct'));
 
-  // Retrieve a single Product with id
-  // router.get("/:productId", products.findOne);
-
-  // Search for
-  router.get('/search?productId', (req, res) => {
-    let  productId  = req.query.productId;
-    Product.findAll({ where: { productId: { [Op.like]: '%' + productId + '%' } } })
+  // Search for products
+  router.get('/:productName', (req, res) => {
+    let productName = req.params.productName;
+    Product.findAll({ where: { productName: { [Op.like]: '%' + productName + '%' } } })
         .then(products => res.render('products', { products }))
         .catch(err => console.log(err));
   });
+
+  // // Search for
+  // router.get('/:productId', (req, res) => {
+  //   let  productId  = req.params.productId;
+  //   Product.findAll({ where: { productId: { [Op.like]: '%' + productId + '%' } } })
+  //       .then(products => res.render('products', { products }))
+  //       .catch(err => console.log(err));
+  // });
 
   // Update a Product with id
   router.put("/:productId", products.update);

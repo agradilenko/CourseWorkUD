@@ -1,0 +1,67 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#productId").keyup(function() {
+            if (!$(this).val()) {
+                $("delete-btn").prop("disabled", true);
+            } else {
+                $("delete-btn").prop("disabled", false);
+            }
+        });
+        $("#delete-btn").on("click", function () {
+            const productId = $('input[name="productId"]').val();
+            $.ajax({
+                method: "PUT",
+                url: "/api/products/"+productId,
+            });
+            window.location.href="http://localhost:8888/api/products";
+            alert(productId);
+        });
+    });
+    </script>
+<section id="add" class="container">
+    <div class="form-wrap">
+        <h1>Add A Product</h1>
+        {{#each errors}}
+            <div class="error">
+                <p>{{text}}</p>
+            </div>
+        {{/each}}
+        <form>
+            <div class="input-group">
+                <label for="productId">Product type id</label>
+                <input type="number" name="productId" id="productId" class="input-box" placeholder="eg. 1, 2, 3, 4"  value={{productId}}>
+            </div>
+            <div class="input-group">
+                <label for="productName">Product Name</label>
+                <input type="text" name="productName" id="productName" class="input-box" placeholder="eg. Intel Core I7, GYGABITE GeForce GTX "
+                       maxlength="100" value={{productName}}>
+            </div>
+            <div class="input-group">
+                <label for="typeId">Product type id</label>
+                <input type="number" name="typeId" id="typeId" class="input-box" placeholder="eg. 1, 2, 3, 4"  value={{typeId}}>
+            </div>
+            <div class="input-group">
+                <label for="manufacturerId">Manufacturer Id</label>
+                <input type="number" name="manufacturerId" id="manufacturerId" class="input-box" placeholder="eg. 1, 2, 3, 4" value={{manufacturerId}}>
+            </div>
+            <div class="input-group">
+                <label for="availability">Availability</label>
+                <input type="text" name="availability" id="availability" class="input-box" placeholder="eg. true, false" value={{availability}}>
+            </div>
+            <div class="input-group">
+                <label for="purchaseCost">Purchase Cost</label>
+                <input type="number" name="purchaseCost" id="purchaseCost" class="input-box" placeholder="eg. 10000, 267222, 100000" value={{purchaseCost}}>
+            </div>
+            <div class="input-group">
+                <label for="saleCost">Sale Cost</label>
+                <input type="number" name="saleCost" id="saleCost" class="input-box" placeholder="eg. 10000, 267222, 100000" value={{saleCost}}>
+            </div>
+            <div class="input-group">
+                <label for="quantityOnStock">QuantityOnStock</label>
+                <input type="number" name="quantityOnStock" id="quantityOnStock" class="input-box" placeholder="eg. 100, 200, 300" value={{quantityOnStock}}>
+            </div>
+        </form>
+        <button id="update-btn" class="btn btn-reverse">Update Product</button>
+    </div>
+</section>

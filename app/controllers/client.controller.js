@@ -25,7 +25,7 @@ exports.create = (req, res) => {
     // Save Client in the database
     Client.create(client)
         .then(data => {
-            res.send(data);
+            res.redirect('/api/clients');
         })
         .catch(err => {
             res.status(500).send({
@@ -35,22 +35,22 @@ exports.create = (req, res) => {
         });
 };
 
-// Retrieve all Clients from the database.
-exports.findAll = (req, res) => {
-    const fullName = req.query.fullName;
-    const condition = fullName ? {fullName: {[Op.iLike]: `%${fullName}%`}} : null;
-
-    Client.findAll({ where: condition })
-        .then(data => {
-            res.send(data);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message:
-                    err.message || "Some error occurred while retrieving clients."
-            });
-        });
-};
+// // Retrieve all Clients from the database.
+// exports.findAll = (req, res) => {
+//     const fullName = req.query.fullName;
+//     const condition = fullName ? {fullName: {[Op.iLike]: `%${fullName}%`}} : null;
+//
+//     Client.findAll({ where: condition })
+//         .then(data => {
+//             res.send(data);
+//         })
+//         .catch(err => {
+//             res.status(500).send({
+//                 message:
+//                     err.message || "Some error occurred while retrieving clients."
+//             });
+//         });
+// };
 
 // Find a single Client with an id
 exports.findOne = (req, res) => {

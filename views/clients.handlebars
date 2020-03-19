@@ -1,0 +1,35 @@
+<section id="gigs" class="container">
+    <nav>
+        <ul class="sub-menu">
+            <li>
+                <a href="/api/clients/add">Add Client</a>
+            </li>
+            <li>
+                <a href="/api/clients/update">Update Client</a>
+            </li>
+            <li>
+                <a href="/api/clients/find">Find Client</a>
+            </li>
+            <li>
+                <a href="/api/clients/delete">Delete Client</a>
+            </li>
+        </ul>
+    </nav>
+    <h1>All Clients</h1>
+
+    {{#each clients}}
+        <div class="gig">
+            <h3>{{clientId}}</h3>
+            <p>{{fullName}}</p>
+            <ul>
+                <li>city: {{city}}</li>
+                <li>address: {{address}}</li>
+                <li>phoneNumber: {{phoneNumber}}</li>
+                <li>email: {{email}}</li>
+            </ul>
+        </div>
+    {{else}}
+        <p>No Clients available</p>
+    {{/each}}
+
+</section>
