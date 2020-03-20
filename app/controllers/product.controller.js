@@ -37,25 +37,6 @@ exports.create = (req, res) => {
         });
 };
 
-// Retrieve all Products from the database.
-// exports.findAll = (req, res) => {
-//   const productName = req.query.productName;
-//   var condition = productName ? { productName: { [Op.iLike]: `%${productName}%` } } : null;
-//
-//   Product.findAll({ where: condition })
-//       .then(products => {
-//         res.render('products', {
-//             products
-//         });
-//       })
-//       .catch(err => {
-//         res.status(500).send({
-//           message:
-//               err.message || "Some error occurred while retrieving products."
-//         });
-//       });
-// };
-
 // Find Product with an id
 exports.findOne = (req, res) => {
   const id = req.params.productId;
@@ -72,23 +53,24 @@ exports.findOne = (req, res) => {
 
 // Update a Product by the id in the request
 exports.update = (req, res) => {
-    const id = req.params.productId;
-
+    const productId = req.params.productId;
+    console.log(productId);
+    console.log(req.body);
     Product.update(req.body, {
-        where: { productId: id }
+        where: { productId: productId }
     })
         .then(num => {
             if (num === 1) {
                 res.render('products', {num})
             } else {
                 res.send({
-                    message: `Cannot update Product with id=${id}. Maybe Product was not found or req.body is empty!`
+                    message: `Cannot update Product with id=${productId}. Maybe Product was not found or req.body is empty!`
                 });
             }
         })
         .catch(err => {
             res.status(500).send({
-                message: "Error updating Product with id=" + id
+                message: "Error updating Product with id=" + productId
             });
         });
 };

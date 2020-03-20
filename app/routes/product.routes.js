@@ -33,7 +33,7 @@ module.exports = app => {
 
   // Search for products
   router.get('/:productName', (req, res) => {
-    let productName = req.params.productName;
+    let productName = req.query.productName;
     Product.findAll({ where: { productName: { [Op.like]: '%' + productName + '%' } } })
         .then(products => res.render('products', { products }))
         .catch(err => console.log(err));

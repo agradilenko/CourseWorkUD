@@ -7,7 +7,6 @@
                 method: "GET",
                 url: "/api/products/"+productName,
             });
-            alert(productName);
         });
     });
 </script>
@@ -24,7 +23,7 @@
                 <label for="productNameSearch">Product Name</label>
                 <input type="text" name="productName" id="productNameSearch" class="input-box" placeholder="eg. ASus, Msi...">
             </div>
+            <input type="submit" value="Find Product" class="btn btn-reverse">
         </form>
-        <button id="find-btn" class="btn btn-reverse">Find Product</button>
     </div>
 </section>
