@@ -1,7 +1,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script>
     $(document).ready(function () {
-        $("#clientId").keyup(function() {
+        $("#discountId").keyup(function() {
             if (!$(this).val()) {
                 $("delete-btn").prop("disabled", true);
             } else {
@@ -9,18 +9,19 @@
             }
         });
         $("#delete-btn").on("click", function () {
-            const clientId = $('input[name="clientId"]').val();
+            const discountId = $('input[name="discountId"]').val();
             $.ajax({
                 method: "DELETE",
-                url: "/api/clients/"+clientId,
+                url: "/api/discounts/"+discountId,
             });
-
+            window.location.href="http://localhost:8888/api/discounts";
+            alert(discountId);
         });
     });
 </script>
 <section id="add" class="container">
     <div class="form-wrap">
-        <h1>Delete Client</h1>
+        <h1>Delete Discount</h1>
         {{#each errors}}
             <div class="error">
                 <p>{{text}}</p>
@@ -28,10 +29,10 @@
         {{/each}}
         <form>
             <div class="input-group">
-                <label for="clientId">Product id</label>
-                <input type="number" name="clientId" id="clientId" class="input-box" placeholder="eg. 1, 2, 3, 4"  value={{clientId}}>
+                <label for="discountId">Discount id</label>
+                <input type="number" name="discountId" id="discountId" class="input-box" placeholder="eg. 1, 2, 3, 4"  value={{discountId}}>
             </div>
         </form>
-        <button id="delete-btn" class="btn btn-reverse">Delete Product</button>
+        <button id="delete-btn" class="btn btn-reverse">Delete Discount</button>
     </div>
 </section>

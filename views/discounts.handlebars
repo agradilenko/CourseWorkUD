@@ -1,0 +1,33 @@
+<section id="gigs" class="container">
+    <nav>
+        <ul class="sub-menu">
+            <li>
+                <a href="/api/discounts/add">Add Discount</a>
+            </li>
+            <li>
+                <a href="/api/discounts/update">Update Discount</a>
+            </li>
+            <li>
+                <a href="/api/discounts/find">Find Discount</a>
+            </li>
+            <li>
+                <a href="/api/discounts/delete">Delete Discount</a>
+            </li>
+        </ul>
+    </nav>
+    <h1>All Discounts</h1>
+
+    {{#each discounts}}
+        <div class="gig">
+            <h3>{{discountId}}</h3>
+            <p>{{discountName}}</p>
+            <ul>
+                <li>discountDescription: {{discountDescription}}</li>
+                <li>discountPercent: {{discountPercent}}</li>
+            </ul>
+        </div>
+    {{else}}
+        <p>No discounts available</p>
+    {{/each}}
+
+</section>

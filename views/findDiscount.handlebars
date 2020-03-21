@@ -2,10 +2,10 @@
 <script>
     $(document).ready(function () {
         $("#find-btn").on("click", function () {
-            const fullName = $('input[name="fullName"]').val();
+            const discountName = $('input[name="fullName"]').val();
             $.ajax({
                 method: "GET",
-                url: "/api/clients/"+fullName,
+                url: "/api/discounts/"+discountName,
             });
         });
     });
@@ -20,8 +20,8 @@
         {{/each}}
         <form action="search" method="GET">
             <div class="input-group">
-                <label for="clientNameSearch">Client Name</label>
-                <input type="text" name="fullName" id="clientNameSearch" class="input-box" placeholder="eg. Иванов Пушкин." required>
+                <label for="discountNameSearch">Client Name</label>
+                <input type="text" name="discountName" id="discountNameSearch" class="input-box" placeholder="eg. Студент, Школьник." required>
             </div>
             <input type="submit" value="Find Product" class="btn btn-reverse">
         </form>

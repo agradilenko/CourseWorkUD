@@ -1,5 +1,4 @@
 
-
 module.exports = app => {
   const products = require("../controllers/product.controller.js");
   const router = require("express").Router();
@@ -38,14 +37,6 @@ module.exports = app => {
         .then(products => res.render('products', { products }))
         .catch(err => console.log(err));
   });
-
-  // // Search for
-  // router.get('/:productId', (req, res) => {
-  //   let  productId  = req.params.productId;
-  //   Product.findAll({ where: { productId: { [Op.like]: '%' + productId + '%' } } })
-  //       .then(products => res.render('products', { products }))
-  //       .catch(err => console.log(err));
-  // });
 
   // Update a Product with id
   router.put("/:productId", products.update);

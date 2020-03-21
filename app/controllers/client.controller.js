@@ -5,7 +5,7 @@ const Op = db.Sequelize.Op;
 // Create and Save a new Client
 exports.create = (req, res) => {
     // Validate request
-    if (!req.body.clientId) {
+    if (!req.body.fullName) {
         res.status(400).send({
             message: "Content can not be empty!"
         });
@@ -52,52 +52,49 @@ exports.create = (req, res) => {
 //         });
 // };
 
-// Find a single Client with an id
-exports.findOne = (req, res) => {
-    const clientId = req.params.clientId;
-
-    Client.findByPk(clientId)
-        .then(data => {
-            res.send(data);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: "Error retrieving Client with id=" + clientId
-            });
-        });
-};
+// // Find a single Client with an id
+// exports.findOne = (req, res) => {
+//     const clientId = req.params.clientId;
+//
+//     Client.findByPk(clientId)
+//         .then(data => {
+//             res.send(data);
+//         })
+//         .catch(err => {
+//             res.status(500).send({
+//                 message: "Error retrieving Client with id=" + clientId
+//             });
+//         });
+// };
 
 // Update a Client by the id in the request
 exports.update = (req, res) => {
-    const id = req.params.clientId;
+    const clientId = req.params.clientId;
 
     Client.update(req.body, {
-        where: { clientId: id }
+        where: { clientId: clientId }
     })
-        .then(num => {
-            if (num == 1) {
-                res.send({
-                    message: "Client was updated successfully."
-                });
+        .then(clients => {
+            if (clients === 1) {
+                res.render('clients', {clients})
             } else {
                 res.send({
-                    message: `Cannot update Client with id=${id}. Maybe Client was not found or req.body is empty!`
+                    message: `Cannot update Product with id=${clientId}. Maybe Product was not found or req.body is empty!`
                 });
             }
         })
         .catch(err => {
             res.status(500).send({
-                message: "Error updating Client with id=" + id
+                message: "Error updating Product with id=" + clientId
             });
         });
 };
-
 // Delete a Client with the specified id in the request
 exports.delete = (req, res) => {
-    const id = req.params.clientId;
+    const clientId = req.params.clientId;
 
     Client.destroy({
-        where: { id: id }
+        where: { clientId: clientId }
     })
         .then(num => {
             if (num == 1) {
@@ -106,13 +103,13 @@ exports.delete = (req, res) => {
                 });
             } else {
                 res.send({
-                    message: `Cannot delete Client with id=${id}. Maybe Client was not found!`
+                    message: `Cannot delete Client with id=${clientId}. Maybe Client was not found!`
                 });
             }
         })
         .catch(err => {
             res.status(500).send({
-                message: "Could not delete Client with clientId=" + id
+                message: "Could not delete Client with clientId=" + clientId
             });
         });
 };

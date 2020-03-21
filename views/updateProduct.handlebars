@@ -13,9 +13,6 @@
             if($("#manufacturerId").val()===""){
                 $("#manufacturerId").attr("disabled", "disabled");
             }
-            if($("#availability").val()===""){
-                $("#availability").attr("disabled", "disabled");
-            }
             if($("#purchaseCost").val()===""){
                 $("#purchaseCost").attr("disabled", "disabled");
             }
@@ -64,10 +61,6 @@
             <div class="input-group">
                 <label for="manufacturerId">Manufacturer Id</label>
                 <input type="number" name="manufacturerId" id="manufacturerId" class="input-box" placeholder="eg. 1, 2, 3, 4" value={{manufacturerId}}>
-            </div>
-            <div class="input-group">
-                <label for="availability">Availability</label>
-                <input type="text" name="availability" id="availability" class="input-box" placeholder="eg. true, false" value={{availability}}>
             </div>
             <div class="input-group">
                 <label for="purchaseCost">Purchase Cost</label>

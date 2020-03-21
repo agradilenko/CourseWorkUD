@@ -49,19 +49,19 @@ exports.findAll = (req, res) => {
 };
 
 // Find a single Discount with an id
-exports.findOne = (req, res) => {
-    const discountId = req.params.discountId;
-
-    Discount.findByPk(discountId)
-        .then(data => {
-            res.send(data);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: "Error retrieving Discount with id=" + discountId
-            });
-        });
-};
+// exports.findOne = (req, res) => {
+//     const discountId = req.params.discountId;
+//
+//     Discount.findByPk(discountId)
+//         .then(data => {
+//             res.send(data);
+//         })
+//         .catch(err => {
+//             res.status(500).send({
+//                 message: "Error retrieving Discount with id=" + discountId
+//             });
+//         });
+// };
 
 // Update a Discount by the id in the request
 exports.update = (req, res) => {

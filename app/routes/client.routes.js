@@ -19,7 +19,7 @@ module.exports = app => {
     router.get('/update', (req, res) => res.render('updateClient'));
 
     // Create a new Client
-    router.post("/", clients.create);
+    router.post("/add", clients.create);
 
     // Retrieve all Clients
     router.get('/', (req, res) =>
@@ -29,8 +29,13 @@ module.exports = app => {
             }))
             .catch(err => console.log(err)));
 
-    // Retrieve a single Client with id
-    router.get("/:clientId", clients.findOne);
+    // Search for products
+    router.get('/:fullName', (req, res) => {
+        let fullName = req.query.fullName;
+        Client.findAll({ where: { fullName: { [Op.like]: '%' + fullName + '%' } } })
+            .then(clients => res.render('clients', { clients }))
+            .catch(err => console.log(err));
+    });
 
     // Update a Client with id
     router.put("/:clientId", clients.update);

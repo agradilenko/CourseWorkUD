@@ -18,10 +18,6 @@ module.exports = (sequelize, Sequelize) => {
           type: Sequelize.INTEGER,
           allowNull: false
         },
-        availability: {
-          type: Sequelize.BOOLEAN,
-          allowNull: false
-        },
         purchaseCost: {
           type: Sequelize.INTEGER,
           allowNull: false

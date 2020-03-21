@@ -18,7 +18,6 @@ exports.create = (req, res) => {
         productName: req.body.productName,
         typeId: req.body.typeId,
         manufacturerId: req.body.manufacturerId,
-        availability: req.body.availability ? req.body.availability : false,
         purchaseCost: req.body.purchaseCost,
         saleCost: req.body.saleCost,
         quantityOnStock: req.body.quantityOnStock,
@@ -59,9 +58,9 @@ exports.update = (req, res) => {
     Product.update(req.body, {
         where: { productId: productId }
     })
-        .then(num => {
-            if (num === 1) {
-                res.render('products', {num})
+        .then(products => {
+            if (products === 1) {
+                res.render('products', {products})
             } else {
                 res.send({
                     message: `Cannot update Product with id=${productId}. Maybe Product was not found or req.body is empty!`

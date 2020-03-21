@@ -1,0 +1,75 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#update-btn").on("click", function () {
+            const clientId = $('input[name="clientId"]').val();
+            const form = $('#updateForm');
+            if($("#fullName").val()===""){
+                $("#fullName").attr("disabled", "disabled");
+            }
+            if($("#city").val()===""){
+                $("#city").attr("disabled", "disabled");
+            }
+            if($("#manufacturerId").val()===""){
+                $("#manufacturerId").attr("disabled", "disabled");
+            }
+            if($("#Address").val()===""){
+                $("#Address").attr("disabled", "disabled");
+            }
+            if($("#phoneNumber").val()===""){
+                $("#phoneNumber").attr("disabled", "disabled");
+            }
+            if($("#email").val()===""){
+                $("#email").attr("disabled", "disabled");
+            }
+            const data2 = form.serialize();
+
+            $.ajax({
+                method: "PUT",
+                url: "/api/clients/"+clientId,
+                dataType: 'json',
+                data:  data2
+            });
+            window.location.href="http://localhost:8888/api/clients";
+        });
+    });
+</script>
+<section id="add" class="container">
+    <div class="form-wrap">
+        <h1>Update Client</h1>
+        {{#each errors}}
+            <div class="error">
+                <p>{{text}}</p>
+            </div>
+        {{/each}}
+        <form id="updateForm">
+
+            <div class="input-group">
+                <label for="clientId">Client id</label>
+                <input type="number" name="clientId" id="clientId" class="input-box" placeholder="eg. 1, 2, 3, 4"  value={{clientId}}>
+            </div>
+            <div class="input-group">
+                <label for="fullName">Client Name</label>
+                <input type="text" name="fullName" id="fullName" class="input-box" placeholder="eg. Пушкин, Петров "
+                       maxlength="100" value={{fullName}}>
+            </div>
+            <div class="input-group">
+                <label for="city">city</label>
+                <input type="text" name="city" id="city" class="input-box" placeholder="eg. Moscow, Kazan"  maxlength="100" value={{city}} >
+            </div>
+            <div class="input-group">
+                <label for="Address">Address</label>
+                <input type="text" name="Address" id="Address" class="input-box" placeholder="eg. true, false" maxlength="100" value={{Address}} >
+            </div>
+            <div class="input-group">
+                <label for="phoneNumber">phoneNumber</label>
+                <input type="text" name="phoneNumber" id="phoneNumber" class="input-box" placeholder="eg. 8xxxxxxxxxx" maxlength="11" value={{phoneNumber}}>
+            </div>
+            <div class="input-group">
+                <label for="email">Sale Cost</label>
+                <input type="email" name="email" id="email" class="input-box" placeholder="a@gmail.com" value={{email}}>
+            </div>
+        </form>
+        <button id="update-btn" class="btn btn-reverse">Update Client</button>
+    </div>
+</section>
