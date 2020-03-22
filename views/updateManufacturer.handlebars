@@ -1,0 +1,59 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#update-btn").on("click", function () {
+            const manufacturerId = $('input[name="manufacturerId"]').val();
+            const form = $('#updateForm');
+            if($("#manufacturerName").val()===""){
+                $("#manufacturerName").attr("disabled", "disabled");
+            }
+            if($("#manufacturerCountry").val()===""){
+                $("#manufacturerCountry").attr("disabled", "disabled");
+            }
+            if($("#headquarters").val()===""){
+                $("#headquarters").attr("disabled", "disabled");
+            }
+
+            const data2 = form.serialize();
+
+            $.ajax({
+                method: "PUT",
+                url: "/api/manufacturers/"+manufacturerId,
+                dataType: 'json',
+                data:  data2
+            });
+            window.location.href="http://localhost:8888/api/manufacturers";
+        });
+    });
+</script>
+<section id="add" class="container">
+    <div class="form-wrap">
+        <h1>Update Manufacturer</h1>
+        {{#each errors}}
+            <div class="error">
+                <p>{{text}}</p>
+            </div>
+        {{/each}}
+        <form id="updateForm">
+
+            <div class="input-group">
+                <label for="manufacturerId">Manufacturer id</label>
+                <input type="number" name="manufacturerId" id="manufacturerId" class="input-box" placeholder="eg. 1, 2, 3, 4"  value={{manufacturerId}}>
+            </div>
+            <div class="input-group">
+                <label for="manufacturerName">Manufacturer Name</label>
+                <input type="text" name="manufacturerName" id="manufacturerName" class="input-box" placeholder="eg. Acer, Asus "
+                       maxlength="100" value={{manufacturerName}}>
+            </div>
+            <div class="input-group">
+                <label for="manufacturerCountry">manufacturerCountry</label>
+                <input type="text" name="manufacturerCountry" id="manufacturerCountry" class="input-box" placeholder="eg. China, Russia"  maxlength="100" value={{manufacturerCountry}} >
+            </div>
+            <div class="input-group">
+                <label for="headquarters">headquarters</label>
+                <input type="number" name="headquarters" id="headquarters" class="input-box" placeholder="eg. 5, 10" maxlength="100" value={{headquarters}} >
+            </div>
+        </form>
+        <button id="update-btn" class="btn btn-reverse">Update Manufacturer</button>
+    </div>
+</section>

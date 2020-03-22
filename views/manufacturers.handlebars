@@ -1,0 +1,33 @@
+<section id="gigs" class="container">
+    <nav>
+        <ul class="sub-menu">
+            <li>
+                <a href="/api/manufacturers/add">Add Manufacturer</a>
+            </li>
+            <li>
+                <a href="/api/manufacturers/update">Update Manufacturer</a>
+            </li>
+            <li>
+                <a href="/api/manufacturers/find">Find Manufacturer</a>
+            </li>
+            <li>
+                <a href="/api/manufacturers/delete">Delete Manufacturer</a>
+            </li>
+        </ul>
+    </nav>
+    <h1>All Manufacturers</h1>
+
+    {{#each manufacturers}}
+        <div class="gig">
+            <h3>{{manufacturerId}}</h3>
+            <p>{{manufacturerName}}</p>
+            <ul>
+                <li>manufacturerCountry: {{manufacturerCountry}}</li>
+                <li>headquarters: {{headquarters}}</li>
+            </ul>
+        </div>
+    {{else}}
+        <p>No Manufacturers available</p>
+    {{/each}}
+
+</section>

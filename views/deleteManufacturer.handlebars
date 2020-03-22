@@ -1,0 +1,38 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#manufacturerId").keyup(function() {
+            if (!$(this).val()) {
+                $("delete-btn").prop("disabled", true);
+            } else {
+                $("delete-btn").prop("disabled", false);
+            }
+        });
+        $("#delete-btn").on("click", function () {
+            const manufacturerId = $('input[name="manufacturerId"]').val();
+            $.ajax({
+                method: "DELETE",
+                url: "/api/manufacturers/"+manufacturerId,
+            });
+            window.location.href="http://localhost:8888/api/manufacturers";
+            alert(manufacturerId);
+        });
+    });
+</script>
+<section id="add" class="container">
+    <div class="form-wrap">
+        <h1>Delete Manufacturer</h1>
+        {{#each errors}}
+            <div class="error">
+                <p>{{text}}</p>
+            </div>
+        {{/each}}
+        <form>
+            <div class="input-group">
+                <label for="manufacturerId">Manufacturer id</label>
+                <input type="number" name="manufacturerId" id="manufacturerId" class="input-box" placeholder="eg. 1, 2, 3, 4"  value={{manufacturerId}}>
+            </div>
+        </form>
+        <button id="delete-btn" class="btn btn-reverse">Delete Manufacturer</button>
+    </div>
+</section>

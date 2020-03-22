@@ -1,0 +1,32 @@
+<section id="add" class="container">
+    <div class="form-wrap">
+        <h1>Add Manufacturer</h1>
+        {{#each errors}}
+            <div class="error">
+                <p>{{text}}</p>
+            </div>
+        {{/each}}
+        <form action="add/" method="POST">
+            <div class="input-group">
+                <label for="manufacturerId">Manufacturer id</label>
+                <input type="number"  required name="manufacturerId" id="manufacturerId" class="input-box" placeholder="eg. 1, 2, 3, 4"  value={{manufacturerId}}>
+            </div>
+            <div class="input-group">
+                <label for="manufacturerName">Manufacturer Name</label>
+                <input type="text" required name="manufacturerName" id="manufacturerName" class="input-box" placeholder="eg. Asus, Dell... "
+                       maxlength="100" value={{manufacturerName}}>
+            </div>
+            <div class="input-group">
+                <label for="manufacturerCountry">manufacturerCountry</label>
+                <input type="text" required name="manufacturerCountry" id="manufacturerCountry" class="input-box" placeholder="eg. China, USA"
+                       maxlength="100" value={{manufacturerCountry}}>
+            </div>
+            <div class="input-group">
+                <label for="headquarters">headquarters</label>
+                <input type="text" required name="headquarters" id="headquarters" class="input-box" placeholder="eg. China, USA"
+                       maxlength="100" value={{headquarters}}>
+            </div>
+            <input type="submit" value="Add Manufacturer" class="btn btn-reverse">
+        </form>
+    </div>
+</section>

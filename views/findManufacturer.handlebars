@@ -1,0 +1,29 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#find-btn").on("click", function () {
+            const manufacturerName = $('input[name="manufacturerName"]').val();
+            $.ajax({
+                method: "GET",
+                url: "/api/manufacturers/"+manufacturerName,
+            });
+        });
+    });
+</script>
+<section id="add" class="container">
+    <div class="form-wrap">
+        <h1>Find Manufacturer</h1>
+        {{#each errors}}
+            <div class="error">
+                <p>{{text}}</p>
+            </div>
+        {{/each}}
+        <form action="search" method="GET">
+            <div class="input-group">
+                <label for="manufacturerNameSearch">Manufacturer Name</label>
+                <input type="text" name="manufacturerName" id="manufacturerNameSearch" class="input-box" placeholder="eg. Asus, MSI" required>
+            </div>
+            <input type="submit" value="Find Product" class="btn btn-reverse">
+        </form>
+    </div>
+</section>
