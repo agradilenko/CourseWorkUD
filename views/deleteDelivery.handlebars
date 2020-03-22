@@ -1,0 +1,38 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#deliveryId").keyup(function() {
+            if (!$(this).val()) {
+                $("delete-btn").prop("disabled", true);
+            } else {
+                $("delete-btn").prop("disabled", false);
+            }
+        });
+        $("#delete-btn").on("click", function () {
+            const deliveryId = $('input[name="deliveryId"]').val();
+            $.ajax({
+                method: "DELETE",
+                url: "/api/delivery/"+deliveryId,
+            });
+            window.location.href="http://localhost:8888/api/delivery";
+            alert(deliveryId);
+        });
+    });
+</script>
+<section id="add" class="container">
+    <div class="form-wrap">
+        <h1>Delete Delivery</h1>
+        {{#each errors}}
+            <div class="error">
+                <p>{{text}}</p>
+            </div>
+        {{/each}}
+        <form>
+            <div class="input-group">
+                <label for="deliveryId">Delivery id</label>
+                <input type="number" name="deliveryId" id="deliveryId" class="input-box" placeholder="eg. 1, 2, 3, 4"  value={{deliveryId}}>
+            </div>
+        </form>
+        <button id="delete-btn" class="btn btn-reverse">Delete Delivery</button>
+    </div>
+</section>

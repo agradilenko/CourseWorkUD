@@ -5,7 +5,7 @@
             const discountName = $('input[name="fullName"]').val();
             $.ajax({
                 method: "GET",
-                url: "/api/discounts/"+discountName,
+                url: "/api/delivery/"+discountName,
             });
         });
     });
@@ -20,8 +20,8 @@
         {{/each}}
         <form action="search" method="GET">
             <div class="input-group">
-                <label for="discountNameSearch">Discount Name</label>
-                <input type="text" name="discountName" id="discountNameSearch" class="input-box" placeholder="eg. Студент, Школьник." required>
+                <label for="deliveryNameSearch">Discount Name</label>
+                <input type="text" name="deliveryName" id="deliveryNameSearch" class="input-box" placeholder="eg. Cдек, Почта." required>
             </div>
             <input type="submit" value="Find Product" class="btn btn-reverse">
         </form>

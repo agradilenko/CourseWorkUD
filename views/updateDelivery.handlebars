@@ -1,0 +1,60 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#update-btn").on("click", function () {
+            const deliveryId = $('input[name="deliveryId"]').val();
+            const form = $('#updateForm');
+            if($("#deliveryName").val()===""){
+                $("#deliveryName").attr("disabled", "disabled");
+            }
+            if($("#phoneNumber").val()===""){
+                $("#phoneNumber").attr("disabled", "disabled");
+            }
+            if($("#email").val()===""){
+                $("#email").attr("disabled", "disabled");
+            }
+
+            const data2 = form.serialize();
+
+            $.ajax({
+                method: "PUT",
+                url: "/api/delivery/"+deliveryId,
+                dataType: 'json',
+                data:  data2
+            });
+            window.location.href="http://localhost:8888/api/delivery";
+        });
+    });
+</script>
+<section id="add" class="container">
+    <div class="form-wrap">
+        <h1>Update Delivery</h1>
+        {{#each errors}}
+            <div class="error">
+                <p>{{text}}</p>
+            </div>
+        {{/each}}
+        <form id="updateForm">
+
+            <div class="input-group">
+                <label for="deliveryId">Delivery id</label>
+                <input type="number" name="deliveryId" id="deliveryId" class="input-box" placeholder="eg. 1, 2, 3, 4"  value={{deliveryId}}>
+            </div>
+            <div class="input-group">
+                <label for="deliveryName">Delivery Name</label>
+                <input type="text" name="deliveryName" id="deliveryName" class="input-box" placeholder="eg. Сдек, Почта "
+                       maxlength="100" value={{deliveryName}}>
+            </div>
+            <div class="input-group">
+                <label for="phoneNumber">phoneNumber</label>
+                <input type="text" name="phoneNumber" id="phoneNumber" class="input-box" placeholder="eg. 8XXXXXXXXXX"  maxlength="11" value={{phoneNumber}} >
+            </div>
+            <div class="input-group">
+                <label for="email">email</label>
+                <input type="number" name="email" id="email" class="input-box" placeholder="eg. a@gmail.com" maxlength="100" value={{email}} >
+            </div>
+        </form>
+        <button id="update-btn" class="btn btn-reverse">Update Delivery</button>
+    </div>
+</section>
+

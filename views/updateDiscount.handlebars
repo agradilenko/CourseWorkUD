@@ -1,0 +1,59 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#update-btn").on("click", function () {
+            const discountId = $('input[name="discountId"]').val();
+            const form = $('#updateForm');
+            if($("#discountName").val()===""){
+                $("#discountName").attr("disabled", "disabled");
+            }
+            if($("#discountDescription").val()===""){
+                $("#discountDescription").attr("disabled", "disabled");
+            }
+            if($("#discountPercent").val()===""){
+                $("#discountPercent").attr("disabled", "disabled");
+            }
+
+            const data2 = form.serialize();
+
+            $.ajax({
+                method: "PUT",
+                url: "/api/discounts/"+discountId,
+                dataType: 'json',
+                data:  data2
+            });
+           window.location.href="http://localhost:8888/api/discounts";
+        });
+    });
+</script>
+<section id="add" class="container">
+    <div class="form-wrap">
+        <h1>Update Discount</h1>
+        {{#each errors}}
+            <div class="error">
+                <p>{{text}}</p>
+            </div>
+        {{/each}}
+        <form id="updateForm">
+
+            <div class="input-group">
+                <label for="discountId">Discount id</label>
+                <input type="number" name="discountId" id="discountId" class="input-box" placeholder="eg. 1, 2, 3, 4"  value={{discountId}}>
+            </div>
+            <div class="input-group">
+                <label for="discountName">Discount Name</label>
+                <input type="text" name="discountName" id="discountName" class="input-box" placeholder="eg. Студент Школьник "
+                       maxlength="100" value={{discountName}}>
+            </div>
+            <div class="input-group">
+                <label for="discountDescription">discountDescription</label>
+                <input type="text" name="discountDescription" id="discountDescription" class="input-box" placeholder="eg. la la la"  maxlength="100" value={{discountDescription}} >
+            </div>
+            <div class="input-group">
+                <label for="discountPercent">discountPercent</label>
+                <input type="number" name="discountPercent" id="discountPercent" class="input-box" placeholder="eg. 5, 10" maxlength="100" value={{discountPercent}} >
+            </div>
+        </form>
+        <button id="update-btn" class="btn btn-reverse">Update Discount</button>
+    </div>
+</section>

@@ -49,35 +49,33 @@ exports.findAll = (req, res) => {
 };
 
 // Find a single Delivery with an id
-exports.findOne = (req, res) => {
-    const deliveryId = req.params.deliveryId;
-
-    Delivery.findByPk(deliveryId)
-        .then(data => {
-            res.send(data);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: "Error retrieving Delivery with id=" + deliveryId
-            });
-        });
-};
+// exports.findOne = (req, res) => {
+//     const deliveryId = req.params.deliveryId;
+//
+//     Delivery.findByPk(deliveryId)
+//         .then(data => {
+//             res.send(data);
+//         })
+//         .catch(err => {
+//             res.status(500).send({
+//                 message: "Error retrieving Delivery with id=" + deliveryId
+//             });
+//         });
+// };
 
 // Update a Delivery by the id in the request
 exports.update = (req, res) => {
     const deliveryId = req.params.deliveryId;
 
     Delivery.update(req.body, {
-        where: { productId: deliveryId }
+        where: {deliveryId: deliveryId}
     })
-        .then(num => {
-            if (num == 1) {
-                res.send({
-                    message: "Delivery was updated successfully."
-                });
+        .then(delivery => {
+            if (delivery === 1) {
+                res.render('delivery', {delivery})
             } else {
                 res.send({
-                    message: `Cannot update Delivery with id=${deliveryId}. Maybe Product was not found or req.body is empty!`
+                    message: `Cannot update Delivery with id=${deliveryId}. Maybe Discount was not found or req.body is empty!`
                 });
             }
         })

@@ -1,0 +1,33 @@
+<section id="gigs" class="container">
+    <nav>
+        <ul class="sub-menu">
+            <li>
+                <a href="/api/delivery/add">Add Delivery</a>
+            </li>
+            <li>
+                <a href="/api/delivery/update">Update Delivery</a>
+            </li>
+            <li>
+                <a href="/api/delivery/find">Find Delivery</a>
+            </li>
+            <li>
+                <a href="/api/delivery/delete">Delete Delivery</a>
+            </li>
+        </ul>
+    </nav>
+    <h1>All Deliverys</h1>
+
+    {{#each delivery}}
+        <div class="gig">
+            <h3>{{deliveryId}}</h3>
+            <p>{{deliveryName}}</p>
+            <ul>
+                <li>phoneNumber: {{phoneNumber}}</li>
+                <li>email: {{email}}</li>
+            </ul>
+        </div>
+    {{else}}
+        <p>No Delivery available</p>
+    {{/each}}
+
+</section>

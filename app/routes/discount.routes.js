@@ -34,7 +34,7 @@ module.exports = app => {
     // Retrieve all Discounts
     router.get("/", discounts.findAll);
 
-    // Search for Вшысщгтеы
+    // Search for Discounts
     router.get('/:discountName', (req, res) => {
         let discountName = req.query.discountName;
         Discount.findAll({ where: { discountName: { [Op.like]: '%' + discountName + '%' } } })

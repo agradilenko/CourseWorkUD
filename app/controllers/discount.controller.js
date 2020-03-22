@@ -68,16 +68,14 @@ exports.update = (req, res) => {
     const discountId = req.params.discountId;
 
     Discount.update(req.body, {
-        where: { productId: discountId }
+        where: { discountId: discountId }
     })
-        .then(num => {
-            if (num == 1) {
-                res.send({
-                    message: "Discount was updated successfully."
-                });
+        .then(discounts => {
+            if (discounts === 1) {
+                res.render('discounts', {discounts})
             } else {
                 res.send({
-                    message: `Cannot update Discount with id=${discountId}. Maybe Product was not found or req.body is empty!`
+                    message: `Cannot update Discount with id=${discountId}. Maybe Discount was not found or req.body is empty!`
                 });
             }
         })

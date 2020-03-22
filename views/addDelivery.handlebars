@@ -1,0 +1,32 @@
+<section id="add" class="container">
+    <div class="form-wrap">
+        <h1>Add Discount</h1>
+        {{#each errors}}
+            <div class="error">
+                <p>{{text}}</p>
+            </div>
+        {{/each}}
+        <form action="add/" method="POST">
+            <div class="input-group">
+                <label for="deliveryId">Delivery id</label>
+                <input type="number"  required name="deliveryId" id="deliveryId" class="input-box" placeholder="eg. 1, 2, 3, 4"  value={{deliveryId}}>
+            </div>
+            <div class="input-group">
+                <label for="deliveryName">Delivery Name</label>
+                <input type="text" required name="deliveryName" id="deliveryName" class="input-box" placeholder="eg. CDEK, POCHTA RF"
+                       maxlength="100" value={{deliveryName}}>
+            </div>
+            <div class="input-group">
+                <label for="phoneNumber">phoneNumber</label>
+                <input type="text" required name="phoneNumber" id="phoneNumber" class="input-box" placeholder="eg. 8XXXXXXXXXX"
+                       maxlength="100" value={{phoneNumber}}>
+            </div>
+            <div class="input-group">
+                <label for="email">Address</label>
+                <input type="email" required name="email" id="email" class="input-box" placeholder="a@gmail.com"
+                       maxlength="100" value={{email}}>
+            </div>
+            <input type="submit" value="Add Discount" class="btn btn-reverse">
+        </form>
+    </div>
+</section>
