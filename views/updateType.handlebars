@@ -1,0 +1,45 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#update-btn").on("click", function () {
+            const typeId = $('input[name="typeId"]').val();
+            const form = $('#updateForm');
+            if($("#category").val()===""){
+                $("#category").attr("disabled", "disabled");
+            }
+
+            const data2 = form.serialize();
+
+            $.ajax({
+                method: "PUT",
+                url: "/api/types/"+typeId,
+                dataType: 'json',
+                data:  data2
+            });
+            window.location.href="http://localhost:8888/api/types";
+        });
+    });
+</script>
+<section id="add" class="container">
+    <div class="form-wrap">
+        <h1>Update Type</h1>
+        {{#each errors}}
+            <div class="error">
+                <p>{{text}}</p>
+            </div>
+        {{/each}}
+        <form id="updateForm">
+
+            <div class="input-group">
+                <label for="typeId">Type id</label>
+                <input type="number" name="typeId" id="typeId" class="input-box" placeholder="eg. 1, 2, 3, 4"  value={{typeId}}>
+            </div>
+            <div class="input-group">
+                <label for="category">Type Name</label>
+                <input type="text" name="category" id="category" class="input-box" placeholder="eg. Видеокарта, Блок питания... "
+                       maxlength="100" value={{category}}>
+            </div>
+        </form>
+        <button id="update-btn" class="btn btn-reverse">Update Type</button>
+    </div>
+</section>

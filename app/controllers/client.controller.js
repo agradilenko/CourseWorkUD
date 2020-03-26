@@ -35,38 +35,6 @@ exports.create = (req, res) => {
         });
 };
 
-// // Retrieve all Clients from the database.
-// exports.findAll = (req, res) => {
-//     const fullName = req.query.fullName;
-//     const condition = fullName ? {fullName: {[Op.iLike]: `%${fullName}%`}} : null;
-//
-//     Client.findAll({ where: condition })
-//         .then(data => {
-//             res.send(data);
-//         })
-//         .catch(err => {
-//             res.status(500).send({
-//                 message:
-//                     err.message || "Some error occurred while retrieving clients."
-//             });
-//         });
-// };
-
-// // Find a single Client with an id
-// exports.findOne = (req, res) => {
-//     const clientId = req.params.clientId;
-//
-//     Client.findByPk(clientId)
-//         .then(data => {
-//             res.send(data);
-//         })
-//         .catch(err => {
-//             res.status(500).send({
-//                 message: "Error retrieving Client with id=" + clientId
-//             });
-//         });
-// };
-
 // Update a Client by the id in the request
 exports.update = (req, res) => {
     const clientId = req.params.clientId;
@@ -130,17 +98,3 @@ exports.deleteAll = (req, res) => {
             });
         });
 };
-
-// exports.findAllClientsFromOneCity = (req, res) => {
-//     const city = req.params.city;
-//     Client.findAll({ where: { city: city } })
-//         .then(data => {
-//             res.send(data);
-//         })
-//         .catch(err => {
-//             res.status(500).send({
-//                 message:
-//                     err.message || "Some error occurred while retrieving Clients."
-//             });
-//         });
-// };

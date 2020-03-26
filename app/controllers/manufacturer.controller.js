@@ -21,7 +21,7 @@ exports.create = (req, res) => {
     // Save Manufacturer in the database
     Manufacturer.create(manufacturer)
         .then(data => {
-            res.send(data);
+            res.redirect('/api/manufacturers');
         })
         .catch(err => {
             res.status(500).send({
@@ -30,38 +30,6 @@ exports.create = (req, res) => {
             })
         })
 };
-
-// // Retrieve all Manufacturers from the database.
-// exports.findAll = (req, res) => {
-//     const manufacturerName = req.query.manufacturerName;
-//     const condition = manufacturerName ? {manufacturerName: {[Op.iLike]: `%${manufacturerName}%`}} : null;
-//
-//     Manufacturer.findAll({ where: condition })
-//         .then(data => {
-//             res.send(data);
-//         })
-//         .catch(err => {
-//             res.status(500).send({
-//                 message:
-//                     err.message || "Some error occurred while retrieving manufacturers."
-//             });
-//         });
-// };
-
-// // Find a single Manufacturer with an id
-// exports.findOne = (req, res) => {
-//     const manufacturerId = req.params.manufacturerId;
-//
-//     Manufacturer.findByPk(manufacturerId)
-//         .then(data => {
-//             res.send(data);
-//         })
-//         .catch(err => {
-//             res.status(500).send({
-//                 message: "Error retrieving Manufacturer with id=" + manufacturerId
-//             });
-//         });
-// };
 
 // Update a Manufacturer by the id in the request
 exports.update = (req, res) => {
@@ -73,7 +41,7 @@ exports.update = (req, res) => {
     })
         .then(manufacturers => {
             if (manufacturers === 1) {
-                res.render('products', {manufacturers})
+                res.render('manufacturers', {manufacturers})
             } else {
                 res.send({
                     message: `Cannot update Product with id=${manufacturerId}. Maybe Product was not found or req.body is empty!`

@@ -6,7 +6,7 @@ module.exports = app => {
     // Create a new Ordered
     router.post("/", ordered.create);
 
-    // Retrieve all Ordereds
+    // Retrieve all Ordered
     router.get("/", ordered.findAll);
 
     // Retrieve a single Ordered with id
@@ -18,7 +18,7 @@ module.exports = app => {
     // Delete a Ordered with id
     router.delete("/:orderId", ordered.delete);
 
-    // Delete all Ordereds
+    // Delete all Ordered
     router.delete("/", ordered.deleteAll);
 
     app.use("/api/ordered", router);

@@ -1,0 +1,32 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
+<section id="add" class="container">
+    <div class="form-wrap">
+        <h1>Add A Order</h1>
+        {{#each errors}}
+            <div class="error">
+                <p>{{text}}</p>
+            </div>
+        {{/each}}
+        <form id ="addOrderForm" action="add/" method="POST">
+            <div class="input-group">
+                <label for="orderId">order id</label>
+                <input type="number" name="orderId" id="orderId" class="input-box" placeholder="eg. 1, 2, 3, 4"  value={{orderId}}>
+            </div>
+            <div class="input-group">
+                <label for="clientId">clientId</label>
+                <input type="number" name="clientId" id="clientId" class="input-box" placeholder="eg. 1, 2, 3, 4" value={{clientId}}>
+            </div>
+            <div class="input-group">
+                <label for="deliveryId">deliveryId</label>
+                <input type="number" name="deliveryId" id="deliveryId" class="input-box" placeholder="eg. 1, 2, 3, 4" value={{deliveryId}}>
+            </div>
+            <div class="input-group">
+                <label for="deliveryCost">deliveryCost</label>
+                <input type="number" name="deliveryCost" id="deliveryCost" class="input-box" placeholder="eg. 10000, 267222, 100000" value={{deliveryCost}}>
+            </div>
+            <div class="input-group">
+            <input type="submit" id ="addOrder" value="Add Order" class="btn btn-reverse">
+        </form>
+    </div>
+</section>

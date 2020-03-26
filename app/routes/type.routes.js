@@ -1,16 +1,41 @@
 module.exports = app => {
     const types = require("../controllers/type.controller.js");
-
     const router = require("express").Router();
+    const Sequelize = require('sequelize');
+    const db = require("../models");
+    const Type = db.types;
+    const Op = db.Sequelize.Op;
+
+    // Display add Type form
+    router.get('/add', (req, res) => res.render('addType'));
+
+    //Display delete Type form
+    router.get('/delete', (req, res) => res.render('deleteType'));
+
+    //Display find Type form
+    router.get('/find', (req, res) => res.render('findType'));
+
+    //Display update Type form
+    router.get('/update', (req, res) => res.render('updateType'));
 
     // Create a new Type
-    router.post("/", types.create);
+    router.post("/add", types.create);
 
     // Retrieve all Types
-    router.get("/", types.findAll);
+    router.get('/', (req, res) =>
+        Type.findAll()
+            .then(types => res.render('types', {
+                types
+            }))
+            .catch(err => console.log(err)));
 
-    // Retrieve a single Type with id
-    router.get("/:typeId", types.findOne);
+    // Search for Types
+    router.get('/:category', (req, res) => {
+        let category = req.query.category;
+        Type.findAll({ where: { category: { [Op.like]: '%' + category   + '%' } } })
+            .then(types => res.render('types', { types }))
+            .catch(err => console.log(err));
+    });
 
     // Update a Type with id
     router.put("/:typeId", types.update);

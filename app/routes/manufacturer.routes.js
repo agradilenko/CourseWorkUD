@@ -6,8 +6,6 @@ module.exports = app => {
     const Manufacturer = db.manufacturer;
     const Op = db.Sequelize.Op;
 
-
-
     // Display add Manufacturer form
     router.get('/add', (req, res) => res.render('addManufacturer'));
 
@@ -21,7 +19,7 @@ module.exports = app => {
     router.get('/update', (req, res) => res.render('updateManufacturer'));
 
     // Create a new Manufacturer
-    router.post("/", manufacturers.create);
+    router.post("/add", manufacturers.create);
 
     // Retrieve all Manufacturer
     router.get('/', (req, res) =>

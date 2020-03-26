@@ -2,17 +2,17 @@
 <script>
     $(document).ready(function () {
         $("#find-btn").on("click", function () {
-            const manufacturerName = $('input[name="manufacturerName"]').val();
+            const category = $('input[name="category"]').val();
             $.ajax({
                 method: "GET",
-                url: "/api/manufacturers/"+manufacturerName,
+                url: "/api/types/"+category,
             });
         });
     });
 </script>
 <section id="add" class="container">
     <div class="form-wrap">
-        <h1>Find Manufacturer</h1>
+        <h1>Find Type</h1>
         {{#each errors}}
             <div class="error">
                 <p>{{text}}</p>
@@ -20,10 +20,10 @@
         {{/each}}
         <form action="search" method="GET">
             <div class="input-group">
-                <label for="manufacturerNameSearch">Manufacturer Name</label>
-                <input type="text" name="manufacturerName" id="manufacturerNameSearch" class="input-box" placeholder="eg. Asus, MSI" required>
+                <label for="categorySearch">Type Name</label>
+                <input type="text" name="category" id="categorySearch" class="input-box" placeholder="eg. Видеокарта, Процессор" required>
             </div>
-            <input type="submit" value="Find Manufacturer" class="btn btn-reverse">
+            <input type="submit" value="Find Type" class="btn btn-reverse">
         </form>
     </div>
 </section>

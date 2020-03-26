@@ -1,0 +1,33 @@
+<section id="gigs" class="container">
+    <nav>
+        <ul class="sub-menu">
+            <li>
+                <a href="/api/orders/add">Add Order</a>
+            </li>
+            <li>
+                <a href="/api/orders/update">Update Order</a>
+            </li>
+            <li>
+                <a href="/api/orders/find">Find Order</a>
+            </li>
+            <li>
+                <a href="/api/orders/delete">Delete Order</a>
+            </li>
+        </ul>
+    </nav>
+    <h1>All Orders</h1>
+
+    {{#each orders}}
+        <div class="gig">
+            <h3>{{orderId}}</h3>
+            <ul>
+                <li>clientId: {{clientId}}</li>
+                <li>deliveryId: {{deliveryId}}</li>
+                <li>deliveryCost: {{deliveryCost}}</li>
+            </ul>
+        </div>
+    {{else}}
+        <p>No Orders available</p>
+    {{/each}}
+
+</section>

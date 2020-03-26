@@ -19,7 +19,7 @@ module.exports = app => {
     router.get('/update', (req, res) => res.render('updateDelivery'));
 
     // Create a new Delivery
-    router.post("/", delivery.create);
+    router.post("/add", delivery.create);
 
     // Retrieve all Delivery
     router.get('/', (req, res) =>
@@ -43,7 +43,7 @@ module.exports = app => {
     // Delete a Delivery with id
     router.delete("/:deliveryId", delivery.delete);
 
-    // Delete all Deliverys
+    // Delete all Delivery
     router.delete("/", delivery.deleteAll);
 
     app.use("/api/delivery", router);

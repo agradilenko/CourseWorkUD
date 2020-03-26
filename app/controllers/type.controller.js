@@ -19,7 +19,7 @@ exports.create = (req, res) => {
     // Save Type in the database
     Type.create(type)
         .then(data => {
-            res.send(data);
+            res.redirect('/api/types');
         })
         .catch(err => {
             res.status(500).send({
@@ -29,53 +29,20 @@ exports.create = (req, res) => {
         })
 };
 
-// Retrieve all Types from the database.
-exports.findAll = (req, res) => {
-    const category = req.query.category;
-    const condition = category ? {category: {[Op.iLike]: `%${category}%`}} : null;
-
-    Type.findAll({ where: condition })
-        .then(data => {
-            res.send(data);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message:
-                    err.message || "Some error occurred while retrieving types."
-            });
-        });
-};
-
-// Find a single Type with an id
-exports.findOne = (req, res) => {
-    const typeId = req.params.typeId;
-
-    Type.findByPk(typeId)
-        .then(data => {
-            res.send(data);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: "Error retrieving Type with id=" + typeId
-            });
-        });
-};
-
 // Update a Type by the id in the request
 exports.update = (req, res) => {
     const typeId = req.params.typeId;
-
+    console.log(typeId);
+    console.log(req.body);
     Type.update(req.body, {
-        where: { productId: typeId }
+        where: { typeId: typeId }
     })
-        .then(num => {
-            if (num == 1) {
-                res.send({
-                    message: "Type was updated successfully."
-                });
+        .then(types => {
+            if (types == 1) {
+                res.render('types', {types});
             } else {
                 res.send({
-                    message: `Cannot update Type with id=${typeId}. Maybe Product was not found or req.body is empty!`
+                    message: `Cannot update Type with id=${typeId}. Maybe Type was not found or req.body is empty!`
                 });
             }
         })
@@ -94,7 +61,7 @@ exports.delete = (req, res) => {
         where: { typeId: typeId }
     })
         .then(num => {
-            if (num == 1) {
+            if (num === 1) {
                 res.send({
                     message:   "Type was deleted successfully!"
                 });

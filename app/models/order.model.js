@@ -5,14 +5,6 @@ module.exports =(sequalize, Sequalize) => {
                 primaryKey: true,
                 autoIncrement: true
             },
-            orderDate: {
-                type: Sequalize.DATEONLY,
-                allowNull: false,
-            },
-            orderExecutionDate: {
-                type: Sequalize.DATEONLY,
-                allowNull: false,
-            },
             clientId: {
                 type: Sequalize.INTEGER,
                 allowNull: false,
@@ -26,7 +18,7 @@ module.exports =(sequalize, Sequalize) => {
                 allowNull: false,
             },
         }, {
-            timestamps: false
+            timestamps: false,
         }
     );
 

@@ -21,7 +21,7 @@ exports.create = (req, res) => {
     // Save Delivery in the database
     Delivery.create(delivery)
         .then(data => {
-            res.send(data);
+            res.redirect('/api/delivery');
         })
         .catch(err => {
             res.status(500).send({
@@ -47,21 +47,6 @@ exports.findAll = (req, res) => {
             });
         });
 };
-
-// Find a single Delivery with an id
-// exports.findOne = (req, res) => {
-//     const deliveryId = req.params.deliveryId;
-//
-//     Delivery.findByPk(deliveryId)
-//         .then(data => {
-//             res.send(data);
-//         })
-//         .catch(err => {
-//             res.status(500).send({
-//                 message: "Error retrieving Delivery with id=" + deliveryId
-//             });
-//         });
-// };
 
 // Update a Delivery by the id in the request
 exports.update = (req, res) => {

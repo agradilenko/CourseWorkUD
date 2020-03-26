@@ -1,0 +1,29 @@
+<section id="gigs" class="container">
+    <nav>
+        <ul class="sub-menu">
+            <li>
+                <a href="/api/types/add">Add Type</a>
+            </li>
+            <li>
+                <a href="/api/types/update">Update Type</a>
+            </li>
+            <li>
+                <a href="/api/types/find">Find Type</a>
+            </li>
+            <li>
+                <a href="/api/types/delete">Delete Type</a>
+            </li>
+        </ul>
+    </nav>
+    <h1>All Types</h1>
+
+    {{#each types}}
+        <div class="gig">
+            <h3>{{typeId}}</h3>
+            <p>{{category}}</p>
+        </div>
+    {{else}}
+        <p>No Types available</p>
+    {{/each}}
+
+</section>

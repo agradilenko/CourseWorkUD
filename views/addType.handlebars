@@ -1,0 +1,22 @@
+<section id="add" class="container">
+    <div class="form-wrap">
+        <h1>Add Type</h1>
+        {{#each errors}}
+            <div class="error">
+                <p>{{text}}</p>
+            </div>
+        {{/each}}
+        <form action="add/" method="POST">
+            <div class="input-group">
+                <label for="typeId">Type id</label>
+                <input type="number"  required name="typeId" id="typeId" class="input-box" placeholder="eg. 1, 2, 3, 4"  value={{typeId}}>
+            </div>
+            <div class="input-group">
+                <label for="category">category</label>
+                <input type="text" required name="category" id="category" class="input-box" placeholder="eg. Видеокарта, Процессор"
+                       maxlength="100" value={{category}}>
+            </div>
+            <input type="submit" value="Add Type" class="btn btn-reverse">
+        </form>
+    </div>
+</section>

@@ -19,7 +19,8 @@ module.exports =(sequalize, Sequalize) => {
                 allowNull: false,
             },
         }, {
-            timestamps: false
+            timestamps: false,
+        freezeTableName: true
         }
     );
 

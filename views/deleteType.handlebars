@@ -1,0 +1,38 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#typeId").keyup(function() {
+            if (!$(this).val()) {
+                $("delete-btn").prop("disabled", true);
+            } else {
+                $("delete-btn").prop("disabled", false);
+            }
+        });
+        $("#delete-btn").on("click", function () {
+            const typeId = $('input[name="typeId"]').val();
+            $.ajax({
+                method: "DELETE",
+                url: "/api/types/"+typeId,
+            });
+            // window.location.href="http://localhost:8888/api/types";
+            // alert(typeId);
+        });
+    });
+</script>
+<section id="add" class="container">
+    <div class="form-wrap">
+        <h1>Delete A Type</h1>
+        {{#each errors}}
+            <div class="error">
+                <p>{{text}}</p>
+            </div>
+        {{/each}}
+        <form>
+            <div class="input-group">
+                <label for="typeId">Type id</label>
+                <input type="number" name="typeId" id="typeId" class="input-box" placeholder="eg. 1, 2, 3, 4"  value={{typeId}}>
+            </div>
+        </form>
+        <button id="delete-btn" class="btn btn-reverse">Delete Type</button>
+    </div>
+</section>

@@ -1,5 +1,5 @@
 const db = require("../models");
-const Order = db.order;
+const Order = db.orders;
 const Op = db.Sequelize.Op;
 
 // Create and Save new Order
@@ -14,8 +14,6 @@ exports.create = (req, res) => {
     // Create new Order
     const order = {
         orderId: req.body.orderId,
-        orderDate: req.body.orderDate,
-        orderExecutionDate: req.body.orderExecutionDate,
         clientId: req.body.clientId,
         deliveryId: req.body.deliveryId,
         deliveryCost: req.body.deliveryCost
@@ -23,7 +21,7 @@ exports.create = (req, res) => {
     // Save Order in the database
     Order.create(order)
         .then(data => {
-            res.send(data);
+            res.redirect('/api/orders');
         })
         .catch(err => {
             res.status(500).send({
@@ -33,44 +31,12 @@ exports.create = (req, res) => {
         })
 };
 
-// Retrieve all Orders from the database.
-exports.findAll = (req, res) => {
-    const orderId = req.query.orderId;
-    const condition = orderId ? {orderId: {[Op.iLike]: `%${orderId}%`}} : null;
-
-    Order.findAll({ where: condition })
-        .then(data => {
-            res.send(data);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message:
-                    err.message || "Some error occurred while retrieving orders."
-            });
-        });
-};
-
-// Find a single Order with an id
-exports.findOne = (req, res) => {
-    const orderId = req.params.orderId;
-
-    Order.findByPk(orderId)
-        .then(data => {
-            res.send(data);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: "Error retrieving Order with id=" + orderId
-            });
-        });
-};
-
 // Update a Order by the id in the request
 exports.update = (req, res) => {
     const orderId = req.params.orderId;
 
     Order.update(req.body, {
-        where: { productId: orderId }
+        where: { orderId: orderId }
     })
         .then(num => {
             if (num == 1) {
@@ -79,7 +45,7 @@ exports.update = (req, res) => {
                 });
             } else {
                 res.send({
-                    message: `Cannot update Order with id=${orderId}. Maybe Product was not found or req.body is empty!`
+                    message: `Cannot update Order with id=${orderId}. Maybe Order was not found or req.body is empty!`
                 });
             }
         })
