@@ -1,0 +1,33 @@
+<section id="gigs" class="container">
+    <nav>
+        <ul class="sub-menu">
+            <li>
+                <a href="/api/ordered/add">Add Ordered</a>
+            </li>
+            <li>
+                <a href="/api/ordered/update">Update Ordered</a>
+            </li>
+            <li>
+                <a href="/api/ordered/find">Find Ordered</a>
+            </li>
+            <li>
+                <a href="/api/ordered/delete">Delete Ordered</a>
+            </li>
+        </ul>
+    </nav>
+    <h1>All Ordered</h1>
+
+    {{#each ordered}}
+        <div class="gig">
+            <h3>{{orderId}}</h3>
+            <ul>
+                <li>productId: {{productId}}</li>
+                <li>typeId: {{quantity}}</li>
+                <li>manufacturerId: {{discountId}}</li>
+            </ul>
+        </div>
+    {{else}}
+        <p>No ordered available</p>
+    {{/each}}
+
+</section>

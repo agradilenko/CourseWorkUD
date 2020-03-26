@@ -5,7 +5,7 @@ const Op = db.Sequelize.Op;
 // Create and Save new Ordered
 exports.create = (req, res) => {
     // Validate request
-    if (!req.body.orderedId) {
+    if (!req.body.orderId) {
         res.status(400).send({
             message: "Content can not be empty!"
         });
@@ -13,7 +13,7 @@ exports.create = (req, res) => {
     }
     // Create new Ordered
     const ordered = {
-        orderedId: req.body.orderedId,
+        orderId: req.body.orderId,
         productId: req.body.productId,
         quantity: req.body.quantity,
         discountId: req.body.discountId
@@ -31,44 +31,12 @@ exports.create = (req, res) => {
         })
 };
 
-// Retrieve all Ordered from the database.
-exports.findAll = (req, res) => {
-    const orderId = req.query.orderId;
-    const condition = orderId ? {orderId: {[Op.iLike]: `%${orderId}%`}} : null;
-
-    Ordered.findAll({ where: condition })
-        .then(data => {
-            res.send(data);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message:
-                    err.message || "Some error occurred while retrieving ordered."
-            });
-        });
-};
-
-// Find a single Ordered with an id
-exports.findOne = (req, res) => {
-    const orderedId = req.params.orderedId;
-
-    Ordered.findByPk(orderedId)
-        .then(data => {
-            res.send(data);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: "Error retrieving Ordered with id=" + orderedId
-            });
-        });
-};
-
 // Update a Ordered by the id in the request
 exports.update = (req, res) => {
-    const orderedId = req.params.orderedId;
+    const orderId = req.params.orderId;
 
     Ordered.update(req.body, {
-        where: { productId: orderedId }
+        where: { orderId: orderId }
     })
         .then(num => {
             if (num == 1) {
@@ -77,23 +45,23 @@ exports.update = (req, res) => {
                 });
             } else {
                 res.send({
-                    message: `Cannot update Ordered with id=${orderedId}. Maybe Product was not found or req.body is empty!`
+                    message: `Cannot update Ordered with id=${orderId}. Maybe Product was not found or req.body is empty!`
                 });
             }
         })
         .catch(err => {
             res.status(500).send({
-                message: "Error updating Ordered with id=" + orderedId
+                message: "Error updating Ordered with id=" + orderId
             });
         });
 };
 
 // Delete a Ordered with the specified id in the request
 exports.delete = (req, res) => {
-    const orderedId = req.params.orderedId;
+    const orderId = req.params.orderId;
 
     Ordered.destroy({
-        where: { orderedId: orderedId }
+        where: { orderId: orderId }
     })
         .then(num => {
             if (num == 1) {
@@ -102,13 +70,13 @@ exports.delete = (req, res) => {
                 });
             } else {
                 res.send({
-                    message: `Cannot delete Ordered with id=${orderedId}. Maybe Ordered was not found!`
+                    message: `Cannot delete Ordered with id=${orderId}. Maybe Ordered was not found!`
                 });
             }
         })
         .catch(err => {
             res.status(500).send({
-                message: "Could not delete Ordered with id=" + orderedId
+                message: "Could not delete Ordered with id=" + orderId
             });
         });
 };

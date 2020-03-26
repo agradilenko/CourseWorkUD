@@ -32,7 +32,7 @@ module.exports = app => {
     // Search for orders
     router.get('/:clientId', (req, res) => {
         let clientId = req.query.clientId;
-        Order.findAll({ where: { clientId: { [Op.like]: '%' + clientId + '%' } } })
+        Order.findAll({ where: { clientId: clientId }})
             .then(orders => res.render('orders', { orders }))
             .catch(err => console.log(err));
     });

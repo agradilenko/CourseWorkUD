@@ -1,0 +1,29 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#find-btn").on("click", function () {
+            const orderId = $('input[name="orderId"]').val();
+            $.ajax({
+                method: "GET",
+                url: "/api/products/"+orderId,
+            });
+        });
+    });
+</script>
+<section id="add" class="container">
+    <div class="form-wrap">
+        <h1>Find Ordered</h1>
+        {{#each errors}}
+            <div class="error">
+                <p>{{text}}</p>
+            </div>
+        {{/each}}
+        <form action="search" method="GET">
+            <div class="input-group">
+                <label for="orderIdSearch">orderId</label>
+                <input type="number" name="orderId" id="orderIdSearch" class="input-box" placeholder="eg. 1, 2, 3...">
+            </div>
+            <input type="submit" value="Find Ordered" class="btn btn-reverse">
+        </form>
+    </div>
+</section>

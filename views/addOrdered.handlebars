@@ -1,0 +1,32 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
+<section id="add" class="container">
+    <div class="form-wrap">
+        <h1>Add Ordered</h1>
+        {{#each errors}}
+            <div class="error">
+                <p>{{text}}</p>
+            </div>
+        {{/each}}
+        <form id ="addOrderedForm" action="add/" method="POST">
+            <div class="input-group">
+                <label for="orderId">order id</label>
+                <input type="number" name="orderId" id="orderId" class="input-box" placeholder="eg. 1, 2, 3, 4"  value={{orderId}}>
+            </div>
+            <div class="input-group">
+                <label for="productId">productId</label>
+                <input type="number" name="productId" id="productId" class="input-box" placeholder="eg. 1, 2, 3, 4" value={{productId}}>
+            </div>
+            <div class="input-group">
+                <label for="quantity">quantity</label>
+                <input type="number" name="quantity" id="quantity" class="input-box" placeholder="eg. 1, 2, 3, 4" value={{quantity}}>
+            </div>
+            <div class="input-group">
+                <label for="discountId">discountId</label>
+                <input type="number" name="discountId" id="discountId" class="input-box" placeholder="eg. 1, 2, 3, 4" value={{discountId}}>
+            </div>
+            <div class="input-group">
+                <input type="submit" id ="addOrdered" value="Add Ordered" class="btn btn-reverse">
+        </form>
+    </div>
+</section>
