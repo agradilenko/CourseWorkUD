@@ -31,6 +31,23 @@ exports.create = (req, res) => {
         })
 };
 
+// Retrieve all Ordered
+exports.retrieveAll = (req, res) => {
+    Ordered.findAll()
+        .then(ordered => res.render('ordered', {
+            ordered
+        }))
+        .catch(err => console.log(err));
+};
+
+//Search by the orderId in the request
+exports.searchOrdered = (req, res) => {
+    let orderId = req.query.orderId;
+    Ordered.findAll({ where: { orderId: orderId  }})
+        .then(ordered => res.render('ordered', { ordered }))
+        .catch(err => console.log(err));
+};
+
 // Update a Ordered by the id in the request
 exports.update = (req, res) => {
     const orderId = req.params.orderId;

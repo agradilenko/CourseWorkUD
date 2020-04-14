@@ -48,6 +48,23 @@ exports.findAll = (req, res) => {
         });
 };
 
+// Retrieve all Deliveries
+exports.retrieveAll = (req, res) => {
+    Delivery.findAll()
+        .then(delivery => res.render('delivery', {
+            delivery
+        }))
+        .catch(err => console.log(err));
+};
+
+//Search by the deliveryName in the request
+exports.searchDelivery = (req, res) => {
+    let deliveryName = req.query.deliveryName;
+    Delivery.findAll({ where: { deliveryName: { [Op.like]: '%' + deliveryName + '%' } } })
+        .then(delivery => res.render('delivery', { delivery }))
+        .catch(err => console.log(err));
+};
+
 // Update a Delivery by the id in the request
 exports.update = (req, res) => {
     const deliveryId = req.params.deliveryId;

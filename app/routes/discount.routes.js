@@ -2,11 +2,6 @@ module.exports = app => {
 
     const discounts = require("../controllers/discount.controller.js");
     const router = require("express").Router();
-    const Sequelize = require('sequelize');
-    const db = require("../models");
-    const Discount = db.discounts;
-    const Op = db.Sequelize.Op;
-
 
     // Display add Discount form
     router.get('/add', (req, res) => res.render('addDiscount'));
@@ -21,26 +16,14 @@ module.exports = app => {
     router.get('/update', (req, res) => res.render('updateDiscount'));
 
     // Retrieve all Discounts
-    router.get('/', (req, res) =>
-        Discount.findAll()
-            .then(discounts => res.render('discounts', {
-                discounts
-            }))
-            .catch(err => console.log(err)));
+    router.get('/', discounts.retrieveAll);
+
+    // Search for Discounts
+    router.get('/:discountName', discounts.searchDiscount);
 
     // Create a new Discount
     router.post("/add", discounts.create);
 
-    // Retrieve all Discounts
-    router.get("/", discounts.findAll);
-
-    // Search for Discounts
-    router.get('/:discountName', (req, res) => {
-        let discountName = req.query.discountName;
-        Discount.findAll({ where: { discountName: { [Op.like]: '%' + discountName + '%' } } })
-            .then(discounts => res.render('discounts', { discounts }))
-            .catch(err => console.log(err));
-    });
     // Update a Discount with id
     router.put("/:discountId", discounts.update);
 

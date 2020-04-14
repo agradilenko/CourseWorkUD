@@ -1,10 +1,6 @@
 module.exports = app => {
     const manufacturers = require("../controllers/manufacturer.controller.js");
     const router = require("express").Router();
-    const Sequelize = require('sequelize');
-    const db = require("../models");
-    const Manufacturer = db.manufacturer;
-    const Op = db.Sequelize.Op;
 
     // Display add Manufacturer form
     router.get('/add', (req, res) => res.render('addManufacturer'));
@@ -21,21 +17,11 @@ module.exports = app => {
     // Create a new Manufacturer
     router.post("/add", manufacturers.create);
 
-    // Retrieve all Manufacturer
-    router.get('/', (req, res) =>
-        Manufacturer.findAll()
-            .then(manufacturers => res.render('manufacturers', {
-                manufacturers
-            }))
-            .catch(err => console.log(err)));
+    // Retrieve all Manufacturers
+    router.get('/', manufacturers.retrieveAll);
 
     // Search for Manufacturer
-    router.get('/:manufacturerName', (req, res) => {
-        let manufacturerName = req.query.manufacturerName;
-        Manufacturer.findAll({ where: { manufacturerName: { [Op.like]: '%' + manufacturerName   + '%' } } })
-            .then(products => res.render('products', { products }))
-            .catch(err => console.log(err));
-    });
+    router.get('/:manufacturerName', manufacturers.searchManufacturer);
 
     // Update a Manufacturer with id
     router.put("/:manufacturerId", manufacturers.update);

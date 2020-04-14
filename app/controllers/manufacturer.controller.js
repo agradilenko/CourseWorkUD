@@ -31,6 +31,23 @@ exports.create = (req, res) => {
         })
 };
 
+// Retrieve all Manufacturers
+exports.retrieveAll = (req, res) => {
+    Manufacturer.findAll()
+        .then(manufacturers => res.render('manufacturers', {
+            manufacturers
+        }))
+        .catch(err => console.log(err));
+};
+
+//Search by the manufacturerName in the request
+exports.searchManufacturer = (req, res) => {
+    let manufacturerName = req.query.manufacturerName;
+    Manufacturer.findAll({ where: { manufacturerName: { [Op.like]: '%' + manufacturerName + '%' } } })
+        .then(manufacturers => res.render('manufacturers', { manufacturers }))
+        .catch(err => console.log(err));
+};
+
 // Update a Manufacturer by the id in the request
 exports.update = (req, res) => {
     const manufacturerId = req.params.manufacturerId;

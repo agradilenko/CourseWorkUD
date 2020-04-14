@@ -1,10 +1,6 @@
 module.exports = app => {
     const clients = require("../controllers/client.controller.js");
     const router = require("express").Router();
-    const Sequelize = require('sequelize');
-    const db = require("../models");
-    const Client = db.clients;
-    const Op = db.Sequelize.Op;
 
     // Display add Client form
     router.get('/add', (req, res) => res.render('addClient'));
@@ -22,20 +18,10 @@ module.exports = app => {
     router.post("/add", clients.create);
 
     // Retrieve all Clients
-    router.get('/', (req, res) =>
-        Client.findAll()
-            .then(clients => res.render('clients', {
-                clients
-            }))
-            .catch(err => console.log(err)));
+    router.get('/', clients.retrieveAll);
 
     // Search for products
-    router.get('/:fullName', (req, res) => {
-        let fullName = req.query.fullName;
-        Client.findAll({ where: { fullName: { [Op.like]: '%' + fullName + '%' } } })
-            .then(clients => res.render('clients', { clients }))
-            .catch(err => console.log(err));
-    });
+    router.get('/:fullName', clients.searchClient);
 
     // Update a Client with id
     router.put("/:clientId", clients.update);

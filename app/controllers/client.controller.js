@@ -35,6 +35,23 @@ exports.create = (req, res) => {
         });
 };
 
+// Retrieve all Clients
+exports.retrieveAll = (req, res) => {
+    Client.findAll()
+        .then(clients => res.render('clients', {
+            clients
+        }))
+        .catch(err => console.log(err));
+};
+
+//Search by the fullName in the request
+exports.searchClient = (req, res) => {
+    let fullName = req.query.fullName;
+    Client.findAll({ where: { fullName: { [Op.like]: '%' + fullName + '%' } } })
+        .then(clients => res.render('clients', { clients }))
+        .catch(err => console.log(err));
+};
+
 // Update a Client by the id in the request
 exports.update = (req, res) => {
     const clientId = req.params.clientId;

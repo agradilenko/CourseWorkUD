@@ -2,21 +2,12 @@
 module.exports = app => {
   const products = require("../controllers/product.controller.js");
   const router = require("express").Router();
-  const Sequelize = require('sequelize');
-  const db = require("../models");
-  const Product = db.products;
-  const Op = db.Sequelize.Op;
 
   // Create a new Product
   router.post("/add", products.create);
 
-  // Retrieve all Products
-  router.get('/', (req, res) =>
-      Product.findAll()
-          .then(products => res.render('products', {
-            products
-          }))
-          .catch(err => console.log(err)));
+  // Retrieve all Clients
+  router.get('/', products.retrieveAll);
 
   // Display add Product form
   router.get('/add', (req, res) => res.render('addProduct'));
@@ -31,12 +22,7 @@ module.exports = app => {
   router.get('/update', (req, res) => res.render('updateProduct'));
 
   // Search for products
-  router.get('/:productName', (req, res) => {
-    let productName = req.query.productName;
-    Product.findAll({ where: { productName: { [Op.like]: '%' + productName + '%' } } })
-        .then(products => res.render('products', { products }))
-        .catch(err => console.log(err));
-  });
+  router.get('/:productName', products.searchProduct);
 
   // Update a Product with id
   router.put("/:productId", products.update);

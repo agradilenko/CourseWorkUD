@@ -31,6 +31,23 @@ exports.create = (req, res) => {
         })
 };
 
+// Retrieve all Orders
+exports.retrieveAll = (req, res) => {
+    Order.findAll()
+        .then(orders => res.render('orders', {
+            orders
+        }))
+        .catch(err => console.log(err));
+};
+
+//Search by the clientId in the request
+exports.searchOrder = (req, res) => {
+    let clientId = req.query.clientId;
+    Order.findAll({ where: { clientId: { [Op.like]: '%' + clientId + '%' } } })
+        .then(orders => res.render('orders', { orders }))
+        .catch(err => console.log(err));
+};
+
 // Update a Order by the id in the request
 exports.update = (req, res) => {
     const orderId = req.params.orderId;

@@ -1,10 +1,6 @@
 module.exports = app => {
     const delivery = require("../controllers/delivery.controller.js");
     const router = require("express").Router();
-    const Sequelize = require('sequelize');
-    const db = require("../models");
-    const Delivery = db.delivery;
-    const Op = db.Sequelize.Op;
 
     // Display add Delivery form
     router.get('/add', (req, res) => res.render('addDelivery'));
@@ -21,21 +17,11 @@ module.exports = app => {
     // Create a new Delivery
     router.post("/add", delivery.create);
 
-    // Retrieve all Delivery
-    router.get('/', (req, res) =>
-        Delivery.findAll()
-            .then(delivery => res.render('delivery', {
-                delivery
-            }))
-            .catch(err => console.log(err)));
+    // Retrieve all Deliveries
+    router.get('/', delivery.retrieveAll);
 
-    // Search for Discounts
-    router.get('/:deliveryName', (req, res) => {
-        let deliveryName = req.query.deliveryName;
-        Delivery.findAll({ where: { deliveryName: { [Op.like]: '%' + deliveryName + '%' } } })
-            .then(delivery => res.render('delivery', { delivery }))
-            .catch(err => console.log(err));
-    });
+    // Search for Deliveries
+    router.get('/:deliveryName', delivery.searchDelivery);
 
     // Update a Delivery with id
     router.put("/:deliveryId", delivery.update);

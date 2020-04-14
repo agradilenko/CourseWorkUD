@@ -31,22 +31,23 @@ exports.create = (req, res) => {
         })
 };
 
-// Retrieve all Discounts from the database.
-exports.findAll = (req, res) => {
-    const discountName = req.query.discountName;
-    const condition = discountName ? {discountName: {[Op.iLike]: `%${discountName}%`}} : null;
-
-    Discount.findAll({ where: condition })
-        .then(data => {
-            res.send(data);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message:
-                    err.message || "Some error occurred while retrieving discounts."
-            });
-        });
+// Retrieve all Discounts
+exports.retrieveAll = (req, res) => {
+    Discount.findAll()
+        .then(discounts => res.render('discounts', {
+            discounts
+        }))
+        .catch(err => console.log(err));
 };
+
+//Search by the deliveryName in the request
+exports.searchDiscount = (req, res) => {
+    let discountName = req.query.discountName;
+    Discount.findAll({ where: { discountName: { [Op.like]: '%' + discountName + '%' } } })
+        .then(discounts => res.render('discounts', { discounts }))
+        .catch(err => console.log(err));
+};
+
 
 // Update a Discount by the id in the request
 exports.update = (req, res) => {

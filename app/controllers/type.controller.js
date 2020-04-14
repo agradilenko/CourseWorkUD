@@ -29,6 +29,23 @@ exports.create = (req, res) => {
         })
 };
 
+// Retrieve all Types
+exports.retrieveAll = (req, res) => {
+    Type.findAll()
+        .then(types => res.render('types', {
+            types
+        }))
+        .catch(err => console.log(err));
+};
+
+//Search by the category in the request
+exports.searchType = (req, res) => {
+    let category = req.query.category;
+    Client.findAll({ where: { category: { [Op.like]: '%' + category + '%' } } })
+        .then(types => res.render('types', { types }))
+        .catch(err => console.log(err));
+};
+
 // Update a Type by the id in the request
 exports.update = (req, res) => {
     const typeId = req.params.typeId;

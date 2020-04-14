@@ -1,10 +1,6 @@
 module.exports = app => {
     const types = require("../controllers/type.controller.js");
     const router = require("express").Router();
-    const Sequelize = require('sequelize');
-    const db = require("../models");
-    const Type = db.types;
-    const Op = db.Sequelize.Op;
 
     // Display add Type form
     router.get('/add', (req, res) => res.render('addType'));
@@ -22,20 +18,10 @@ module.exports = app => {
     router.post("/add", types.create);
 
     // Retrieve all Types
-    router.get('/', (req, res) =>
-        Type.findAll()
-            .then(types => res.render('types', {
-                types
-            }))
-            .catch(err => console.log(err)));
+    router.get('/', types.retrieveAll);
 
     // Search for Types
-    router.get('/:category', (req, res) => {
-        let category = req.query.category;
-        Type.findAll({ where: { category: { [Op.like]: '%' + category   + '%' } } })
-            .then(types => res.render('types', { types }))
-            .catch(err => console.log(err));
-    });
+    router.get('/:category', types.searchType);
 
     // Update a Type with id
     router.put("/:typeId", types.update);

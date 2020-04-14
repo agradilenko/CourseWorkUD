@@ -1,10 +1,6 @@
 module.exports = app => {
     const orders = require("../controllers/order.controller.js");
     const router = require("express").Router();
-    const Sequelize = require('sequelize');
-    const db = require("../models");
-    const Order = db.orders;
-    const Op = db.Sequelize.Op;
 
     // Display add Order form
     router.get('/add', (req, res) => res.render('addOrder'));
@@ -22,20 +18,10 @@ module.exports = app => {
     router.post("/add", orders.create);
 
     // Retrieve all Orders
-    router.get('/', (req, res) =>
-        Order.findAll()
-            .then(orders => res.render('orders', {
-                orders
-            }))
-            .catch(err => console.log(err)));
+    router.get('/', orders.retrieveAll);
 
-    // Search for orders
-    router.get('/:clientId', (req, res) => {
-        let clientId = req.query.clientId;
-        Order.findAll({ where: { clientId: clientId }})
-            .then(orders => res.render('orders', { orders }))
-            .catch(err => console.log(err));
-    });
+    // Search for Orders
+    router.get('/:category', orders.searchOrder);
 
     // Update a Order with id
     router.put("/:orderId", orders.update);

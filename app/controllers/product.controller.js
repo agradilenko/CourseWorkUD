@@ -36,6 +36,23 @@ exports.create = (req, res) => {
         });
 };
 
+// Retrieve all Products
+exports.retrieveAll = (req, res) => {
+    Product.findAll()
+        .then(products => res.render('products', {
+            products
+        }))
+        .catch(err => console.log(err));
+};
+
+//Search by the productName in the request
+exports.searchProduct = (req, res) => {
+    let productName = req.query.productName;
+    Client.findAll({ where: { productName: { [Op.like]: '%' + productName + '%' } } })
+        .then(products => res.render('products', { products }))
+        .catch(err => console.log(err));
+};
+
 // Update a Product by the id in the request
 exports.update = (req, res) => {
     const productId = req.params.productId;
